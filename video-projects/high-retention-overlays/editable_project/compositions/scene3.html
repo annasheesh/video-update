@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Scene 3 - HyperFrames Open Source Free</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: transparent;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      #scene3-root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      /* Title */
+      .scene-title {
+        position: absolute;
+        top: 60px;
+        left: 80px;
+        font-size: 64px;
+        font-weight: 800;
+        color: #ffffff;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+        letter-spacing: -0.02em;
+      }
+
+      /* GitHub Card */
+      .gh-card-wrap {
+        position: absolute;
+        top: 150px;
+        left: 80px;
+        width: 400px;
+        perspective: 900px;
+      }
+      .gh-card-img {
+        width: 100%;
+        height: auto;
+        border-radius: 24px;
+        border: 2px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 26px 55px rgba(0, 0, 0, 0.65);
+        transform: rotateY(-8deg) rotateX(4deg);
+      }
+
+      /* Right Badges Column */
+      .badges-col {
+        position: absolute;
+        top: 170px;
+        left: 520px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 28px;
+        background: #1e293b;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        font-family: monospace;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: #ffffff;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      }
+
+      .free-wrap {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .free-text {
+        font-size: 140px;
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        color: #ffffff;
+        text-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 255, 255, 0.3);
+      }
+      .underline-bar {
+        width: 320px;
+        height: 12px;
+        background: #ffffff;
+        border-radius: 6px;
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-nx0r" id="scene3-root" data-composition-id="scene3" data-duration="2.3" data-width="1080" data-height="1920">
+      <div data-hf-id="hf-b6h3" id="s3Title" class="scene-title">HyperFrames</div>
+
+      <div data-hf-id="hf-62sj" id="s3CardWrap" class="gh-card-wrap">
+        <img data-hf-id="hf-enzz" id="s3CardImg" src="../assets/images/test_gh_card.png" alt="GitHub Repo" class="gh-card-img">
+      </div>
+
+      <div data-hf-id="hf-nk01" id="s3Badges" class="badges-col">
+        <div data-hf-id="hf-mabq" id="s3Pill1" class="pill">OPEN SOURCE</div>
+        <div data-hf-id="hf-zdw5" id="s3Pill2" class="pill">APACHE-2.0</div>
+        <div data-hf-id="hf-w2m9" id="s3FreeWrap" class="free-wrap">
+          <div data-hf-id="hf-uw0u" id="s3Free" class="free-text">FREE</div>
+          <div data-hf-id="hf-8fk8" id="s3Underline" class="underline-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      gsap.set("#s3Title", { opacity: 0, y: -20 });
+      gsap.set("#s3CardWrap", { opacity: 0, scale: 0.95 });
+      gsap.set("#s3Pill1", { opacity: 0, x: 30 });
+      gsap.set("#s3Pill2", { opacity: 0, x: 30 });
+      gsap.set("#s3Free", { opacity: 0, scale: 0.7 });
+      gsap.set("#s3Underline", { scaleX: 0, transformOrigin: "left center" });
+
+      tl.to("#s3Title", { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.05);
+      tl.to("#s3CardWrap", { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" }, 0.05);
+      tl.to("#s3Pill1", { opacity: 1, x: 0, duration: 0.35, ease: "back.out(1.6)" }, 0.15);
+      tl.to("#s3Pill2", { opacity: 1, x: 0, duration: 0.35, ease: "back.out(1.6)" }, 0.35);
+
+      // Huge impact on FREE at t=0.8s (overall t=7.3s matching bass impact SFX)
+      tl.to("#s3Free", { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 0.75);
+      tl.to("#s3Underline", { scaleX: 1, duration: 0.4, ease: "power3.out" }, 0.95);
+
+      // Exit
+      tl.to(["#s3Title", "#s3CardWrap", "#s3Badges"], {
+        opacity: 0,
+        y: -30,
+        duration: 0.3,
+        ease: "power2.in"
+      }, 2.0);
+
+      window.__timelines["scene3"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

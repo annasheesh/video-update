@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Features Scene</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #08080c;
+        color: #ffffff;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      #features-root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 50%, #171b30 0%, #08080c 75%);
+      }
+      .grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+        background-size: 80px 80px;
+        opacity: 0.7;
+      }
+      .glow-orb {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+        height: 700px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(99, 102, 241, 0) 70%);
+        filter: blur(60px);
+        pointer-events: none;
+      }
+      .scene-content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 80px;
+        text-align: center;
+      }
+      .action-badge {
+        display: inline-block;
+        font-family: monospace;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #60a5fa;
+        background: rgba(59, 130, 246, 0.12);
+        padding: 10px 24px;
+        border-radius: 8px;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        margin-bottom: 28px;
+      }
+      .big-headline {
+        font-size: 104px;
+        font-weight: 900;
+        line-height: 1.0;
+        letter-spacing: -0.04em;
+        color: #ffffff;
+        margin-bottom: 32px;
+      }
+      .big-headline .hl-blue {
+        color: #3b82f6;
+      }
+      .gradient-sub {
+        font-size: 34px;
+        color: #94a3b8;
+        line-height: 1.45;
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-4kgn" id="features-root" data-composition-id="features" data-duration="3" data-width="1080" data-height="1920">
+      
+      
+
+      
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+                  
+                        
+      window.__timelines["features"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Intro Scene</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #08080c;
+        color: #ffffff;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      #intro-root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 40%, #151d36 0%, #08080c 70%);
+      }
+      .grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+        background-size: 80px 80px;
+        opacity: 0.7;
+      }
+      .glow-orb {
+        position: absolute;
+        top: 38%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 650px;
+        height: 650px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.28) 0%, rgba(59, 130, 246, 0) 70%);
+        filter: blur(50px);
+        pointer-events: none;
+      }
+      .status-pill {
+        position: absolute;
+        top: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 28px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        backdrop-filter: blur(12px);
+        font-family: monospace;
+        font-size: 24px;
+        letter-spacing: 0.08em;
+        color: #93c5fd;
+      }
+      .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #10b981;
+        box-shadow: 0 0 12px #10b981;
+      }
+      .scene-content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 80px;
+        text-align: center;
+      }
+      .hero-title {
+        font-size: 88px;
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        background: linear-gradient(180deg, #ffffff 30%, #94a3b8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 24px;
+      }
+      .hero-title span {
+        background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-subtitle {
+        font-size: 34px;
+        line-height: 1.45;
+        color: #94a3b8;
+        max-width: 840px;
+      }
+      .feature-tags {
+        display: flex;
+        gap: 16px;
+        margin-top: 48px;
+        justify-content: center;
+      }
+      .tag {
+        padding: 12px 24px;
+        background: rgba(59, 130, 246, 0.12);
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        border-radius: 12px;
+        font-size: 26px;
+        font-weight: 600;
+        color: #bfdbfe;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-97on" id="intro-root" data-composition-id="intro" data-duration="3" data-width="1080" data-height="1920">
+      <div data-hf-id="hf-upxp" id="gridLines" class="grid-lines"></div>
+      <div data-hf-id="hf-109h" id="glowOrb" class="glow-orb"></div>
+
+      <div data-hf-id="hf-tpvv" id="statusPill" class="status-pill">
+        <span data-hf-id="hf-i0ip" class="status-dot"></span>
+        <span data-hf-id="hf-m611">WORKSPACE READY</span>
+      </div>
+
+      <div data-hf-id="hf-soar" id="introContent" class="scene-content">
+        <h1 data-hf-id="hf-2ns5" id="heroTitle" class="hero-title">HYPER<span data-hf-id="hf-35cj">FRAMES</span></h1>
+        <p data-hf-id="hf-vmri" id="heroSub" class="hero-subtitle">Next-generation AI motion graphics &amp; short-form video workspace</p>
+        <div data-hf-id="hf-17ez" id="featureTags" class="feature-tags">
+          <span data-hf-id="hf-mhb2" class="tag">HTML + GSAP</span>
+          <span data-hf-id="hf-fb88" class="tag">Reels / Shorts</span>
+          <span data-hf-id="hf-f0dv" class="tag">Zero Bloat</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      gsap.set("#statusPill", { opacity: 0, y: -20 });
+      gsap.set("#heroTitle", { opacity: 0, y: 50, scale: 0.95 });
+      gsap.set("#heroSub", { opacity: 0, y: 30 });
+      gsap.set(".tag", { opacity: 0, scale: 0.8, y: 20 });
+
+      tl.to("#statusPill", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.2);
+      tl.to("#heroTitle", { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }, 0.4);
+      tl.to("#heroSub", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.7);
+      tl.to(".tag", { opacity: 1, scale: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "back.out(1.7)" }, 0.9);
+
+      // Transition out
+      tl.to(["#heroTitle", "#heroSub", "#featureTags"], { opacity: 0, scale: 1.05, y: -30, duration: 0.4, ease: "power2.in" }, 2.6);
+
+      window.__timelines["intro"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

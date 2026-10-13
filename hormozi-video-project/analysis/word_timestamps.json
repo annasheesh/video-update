@@ -1,0 +1,170 @@
+[
+  {
+    "word": "because",
+    "start": 0.0,
+    "end": 0.78,
+    "probability": 0.472
+  },
+  {
+    "word": "because",
+    "start": 0.78,
+    "end": 1.26,
+    "probability": 0.45
+  },
+  {
+    "word": "eventually",
+    "start": 1.26,
+    "end": 1.74,
+    "probability": 0.973
+  },
+  {
+    "word": "whether",
+    "start": 1.74,
+    "end": 2.04,
+    "probability": 0.87
+  },
+  {
+    "word": "you",
+    "start": 2.04,
+    "end": 2.24,
+    "probability": 0.992
+  },
+  {
+    "word": "start",
+    "start": 2.24,
+    "end": 2.46,
+    "probability": 0.985
+  },
+  {
+    "word": "now",
+    "start": 2.46,
+    "end": 2.74,
+    "probability": 0.599
+  },
+  {
+    "word": "or",
+    "start": 2.74,
+    "end": 3.1,
+    "probability": 0.898
+  },
+  {
+    "word": "whether",
+    "start": 3.1,
+    "end": 3.32,
+    "probability": 0.987
+  },
+  {
+    "word": "you",
+    "start": 3.32,
+    "end": 3.48,
+    "probability": 0.996
+  },
+  {
+    "word": "start",
+    "start": 3.48,
+    "end": 3.64,
+    "probability": 0.98
+  },
+  {
+    "word": "later",
+    "start": 3.64,
+    "end": 3.98,
+    "probability": 0.996
+  },
+  {
+    "word": "you",
+    "start": 3.98,
+    "end": 4.8,
+    "probability": 0.72
+  },
+  {
+    "word": "will",
+    "start": 4.8,
+    "end": 5.04,
+    "probability": 0.978
+  },
+  {
+    "word": "you",
+    "start": 5.04,
+    "end": 5.66,
+    "probability": 0.786
+  },
+  {
+    "word": "will",
+    "start": 5.66,
+    "end": 5.96,
+    "probability": 0.991
+  },
+  {
+    "word": "hit",
+    "start": 5.96,
+    "end": 6.24,
+    "probability": 0.99
+  },
+  {
+    "word": "that",
+    "start": 6.24,
+    "end": 6.5,
+    "probability": 0.983
+  },
+  {
+    "word": "H",
+    "start": 6.5,
+    "end": 6.76,
+    "probability": 0.635
+  },
+  {
+    "word": "where",
+    "start": 6.76,
+    "end": 7.0,
+    "probability": 0.917
+  },
+  {
+    "word": "you",
+    "start": 7.0,
+    "end": 7.16,
+    "probability": 0.997
+  },
+  {
+    "word": "don't",
+    "start": 7.16,
+    "end": 7.34,
+    "probability": 0.995
+  },
+  {
+    "word": "even",
+    "start": 7.34,
+    "end": 7.52,
+    "probability": 0.997
+  },
+  {
+    "word": "have",
+    "start": 7.52,
+    "end": 7.8,
+    "probability": 0.999
+  },
+  {
+    "word": "that",
+    "start": 7.8,
+    "end": 7.96,
+    "probability": 0.993
+  },
+  {
+    "word": "much",
+    "start": 7.96,
+    "end": 8.18,
+    "probability": 0.998
+  },
+  {
+    "word": "time",
+    "start": 8.18,
+    "end": 8.38,
+    "probability": 0.999
+  },
+  {
+    "word": "anymore",
+    "start": 8.38,
+    "end": 8.66,
+    "probability": 0.991
+  }
+]

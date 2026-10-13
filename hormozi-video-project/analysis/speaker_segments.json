@@ -1,0 +1,18 @@
+[
+  {
+    "speaker_id": "SPEAKER_MAIN",
+    "role": "Primary Speaker",
+    "start": 0.6,
+    "end": 8.75,
+    "confidence": 0.98,
+    "status": "valid_speech"
+  },
+  {
+    "speaker_id": "AMBIENT_SILENCE",
+    "role": "Room Ambience / Non-speech",
+    "start": 8.75,
+    "end": 11.83,
+    "confidence": 0.99,
+    "status": "dead_air"
+  }
+]

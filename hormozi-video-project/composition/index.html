@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: 'Montserrat';
+        src: local('Montserrat'), local('Montserrat-Black'), local('Arial Black');
+      }
+      @font-face {
+        font-family: 'Anton';
+        src: local('Anton'), local('Impact');
+      }
+      @font-face {
+        font-family: 'Impact';
+        src: local('Impact');
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: transparent;
+        font-family: 'Montserrat', 'Impact', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+      }
+
+      /* ==================== EXPLANATORY GRAPHICS (TOP REGION: y=100-480) ==================== */
+      .graphics-layer {
+        position: absolute;
+        top: 100px;
+        left: 60px;
+        width: 960px;
+        height: 380px;
+        pointer-events: none;
+        z-index: 50;
+      }
+
+      /* VIZ 1: Comparative Decision Branch (Start Now vs Start Later) */
+      #viz-branch {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+      }
+
+      .viz-header-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 24px;
+        border-radius: 999px;
+        background: rgba(15, 15, 20, 0.88);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+        color: #FFFFFF;
+        font-size: 26px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+
+      .branch-cards-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .branch-card {
+        flex: 1;
+        background: rgba(20, 20, 28, 0.92);
+        backdrop-filter: blur(16px);
+        border-radius: 20px;
+        padding: 24px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8);
+        border: 3px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .branch-card.now {
+        border-color: #00FF66;
+        box-shadow: 0 0 35px rgba(0, 255, 102, 0.4), 0 12px 36px rgba(0,0,0,0.8);
+      }
+      .branch-card.later {
+        border-color: #FF3B30;
+        box-shadow: 0 0 35px rgba(255, 59, 48, 0.4), 0 12px 36px rgba(0,0,0,0.8);
+      }
+
+      .branch-title {
+        font-size: 32px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        margin-bottom: 8px;
+      }
+      .now .branch-title { color: #00FF66; }
+      .later .branch-title { color: #FF3B30; }
+
+      .branch-metric {
+        font-size: 22px;
+        font-weight: 800;
+        color: #FFFFFF;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 6px 14px;
+        border-radius: 10px;
+      }
+
+      .branch-vs {
+        font-size: 32px;
+        font-weight: 900;
+        color: #FFDF00;
+        text-shadow: 0 0 15px rgba(255, 223, 0, 0.7);
+      }
+
+      /* VIZ 2: Inevitable Age Milestone */
+      #viz-milestone {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+      }
+
+      .milestone-box {
+        width: 90%;
+        background: linear-gradient(135deg, rgba(35, 25, 10, 0.95), rgba(15, 15, 20, 0.95));
+        border: 4px solid #FFCC00;
+        border-radius: 24px;
+        padding: 28px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 0 45px rgba(255, 204, 0, 0.45), 0 16px 40px rgba(0,0,0,0.8);
+      }
+
+      .milestone-left {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .milestone-label {
+        font-size: 24px;
+        font-weight: 800;
+        color: #FFCC00;
+        letter-spacing: 0.08em;
+      }
+
+      .milestone-value {
+        font-size: 52px;
+        font-weight: 900;
+        color: #FFFFFF;
+        letter-spacing: -0.02em;
+        text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+      }
+
+      .milestone-icon {
+        font-size: 68px;
+        filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.6));
+      }
+
+      /* VIZ 3: Depleting Time Gauge */
+      #viz-gauge {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+      }
+
+      .gauge-card {
+        width: 94%;
+        background: rgba(25, 10, 12, 0.95);
+        border: 3px solid #FF3B30;
+        border-radius: 24px;
+        padding: 24px 28px;
+        box-shadow: 0 0 40px rgba(255, 59, 48, 0.45), 0 16px 40px rgba(0,0,0,0.8);
+      }
+
+      .gauge-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .gauge-title {
+        font-size: 26px;
+        font-weight: 900;
+        color: #FFFFFF;
+        letter-spacing: 0.04em;
+      }
+
+      .gauge-status {
+        background: #FF3B30;
+        color: #FFFFFF;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+      }
+
+      .progress-track {
+        width: 100%;
+        height: 32px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg, #FF9500, #FF3B30);
+        border-radius: 16px;
+        box-shadow: 0 0 20px rgba(255, 59, 48, 0.8);
+      }
+
+      /* ==================== CAPTIONS LAYER (LOWER REGION: y=1420) ==================== */
+      .captions-layer {
+        position: absolute;
+        top: 1420px;
+        left: 20px;
+        width: 1040px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 100;
+      }
+
+      .caption-cue {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-size: 58px;
+        font-weight: 900;
+        color: #FFFFFF;
+        line-height: 1.15;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        -webkit-text-stroke: 4px #000000;
+        text-shadow: 0 8px 24px rgba(0, 0, 0, 0.95), 0 4px 8px rgba(0,0,0,0.8);
+        opacity: 0;
+        white-space: nowrap;
+      }
+
+      /* Color highlights */
+      .hl-yellow {
+        color: #FFDF00;
+        -webkit-text-stroke: 4px #000000;
+        filter: drop-shadow(0 0 12px rgba(255, 223, 0, 0.6));
+      }
+      .hl-green {
+        color: #00FF66;
+        -webkit-text-stroke: 4px #000000;
+        filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.6));
+      }
+      .hl-red {
+        color: #FF3B30;
+        -webkit-text-stroke: 4px #000000;
+        filter: drop-shadow(0 0 12px rgba(255, 59, 48, 0.6));
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="6.3"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- EXPLANATORY GRAPHICS LAYER -->
+      <div class="graphics-layer" data-layout-allow-overlap>
+        <!-- VIZ 1: Comparative Decision Branch -->
+        <div id="viz-branch">
+          <div class="viz-header-pill">⚡ DECISION HORIZON</div>
+          <div class="branch-cards-container">
+            <div class="branch-card now" id="card-now">
+              <div class="branch-title">START NOW</div>
+              <div class="branch-metric">📈 +MAX TIME</div>
+            </div>
+            <div class="branch-vs" id="card-vs">VS</div>
+            <div class="branch-card later" id="card-later">
+              <div class="branch-title">START LATER</div>
+              <div class="branch-metric">📉 -ZERO TIME</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIZ 2: Inevitable Age Milestone -->
+        <div id="viz-milestone">
+          <div class="viz-header-pill" style="border-color: #FFCC00; color: #FFCC00;">⚠️ INEVITABLE MILESTONE</div>
+          <div class="milestone-box">
+            <div class="milestone-left">
+              <div class="milestone-label">CRITICAL HORIZON</div>
+              <div class="milestone-value">THAT AGE</div>
+            </div>
+            <div class="milestone-icon">⏳</div>
+          </div>
+        </div>
+
+        <!-- VIZ 3: Depleting Time Gauge -->
+        <div id="viz-gauge">
+          <div class="viz-header-pill" style="border-color: #FF3B30; color: #FF3B30;">🛑 THE ROOT BOTTLENECK</div>
+          <div class="gauge-card">
+            <div class="gauge-top-row">
+              <div class="gauge-title">AVAILABLE TIME</div>
+              <div class="gauge-status">RUNNING OUT</div>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="gauge-fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPTIONS LAYER -->
+      <div class="captions-layer" data-layout-allow-overflow data-layout-allow-overlap>
+        <div id="cue-1" class="caption-cue">BECAUSE</div>
+        <div id="cue-2" class="caption-cue"><span class="hl-yellow">EVENTUALLY</span></div>
+        <div id="cue-3" class="caption-cue">WHETHER YOU</div>
+        <div id="cue-4" class="caption-cue">START <span class="hl-green">NOW</span></div>
+        <div id="cue-5" class="caption-cue">OR WHETHER</div>
+        <div id="cue-6" class="caption-cue">START <span class="hl-red">LATER,</span></div>
+        <div id="cue-7" class="caption-cue">YOU WILL</div>
+        <div id="cue-8" class="caption-cue">HIT THAT <span class="hl-yellow">AGE</span></div>
+        <div id="cue-9" class="caption-cue">WHERE YOU</div>
+        <div id="cue-10" class="caption-cue"><span class="hl-red">DON'T</span> EVEN HAVE</div>
+        <div id="cue-11" class="caption-cue">THAT MUCH <span class="hl-yellow">TIME.</span></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // ==================== EXPLANATORY GRAPHICS TIMINGS ====================
+      // VIZ 1: Decision Horizon Branch (0.50s - 3.05s)
+      tl.fromTo("#viz-branch", { opacity: 0, scale: 0.85, y: -20, display: "flex" }, { opacity: 1, scale: 1, y: 0, duration: 0.25, ease: "back.out(1.5)" }, 0.50);
+      tl.fromTo("#card-now", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "back.out(1.7)" }, 1.20);
+      tl.fromTo("#card-vs", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.15, ease: "back.out(2)" }, 1.80);
+      tl.fromTo("#card-later", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "back.out(1.7)" }, 2.10);
+      tl.to("#viz-branch", { opacity: 0, scale: 0.9, duration: 0.08, ease: "power2.in" }, 2.95);
+      tl.set("#viz-branch", { display: "none" }, 3.05);
+
+      // VIZ 2: Inevitable Age Milestone (3.10s - 4.55s)
+      tl.set("#viz-milestone", { display: "flex" }, 3.08);
+      tl.fromTo("#viz-milestone", { opacity: 0, scale: 0.8, y: -30 }, { opacity: 1, scale: 1, y: 0, duration: 0.22, ease: "back.out(1.8)" }, 3.10);
+      tl.to("#viz-milestone", { opacity: 0, scale: 0.9, duration: 0.08, ease: "power2.in" }, 4.45);
+      tl.set("#viz-milestone", { display: "none" }, 4.55);
+
+      // VIZ 3: Depleting Time Gauge (4.60s - 6.30s)
+      tl.set("#viz-gauge", { display: "flex" }, 4.58);
+      tl.fromTo("#viz-gauge", { opacity: 0, scale: 0.85, y: -20 }, { opacity: 1, scale: 1, y: 0, duration: 0.22, ease: "back.out(1.6)" }, 4.60);
+      tl.fromTo("#gauge-fill", { width: "100%" }, { width: "12%", duration: 1.2, ease: "power2.out" }, 4.80);
+
+      // ==================== HORMOZI CAPTIONS TIMINGS (Bounce Entrances) ====================
+      const captionCues = [
+        { id: "#cue-1", start: 0.00, end: 0.50 },
+        { id: "#cue-2", start: 0.50, end: 1.10 },
+        { id: "#cue-3", start: 1.10, end: 1.55 },
+        { id: "#cue-4", start: 1.55, end: 2.10 },
+        { id: "#cue-5", start: 2.10, end: 2.50 },
+        { id: "#cue-6", start: 2.50, end: 3.10 },
+        { id: "#cue-7", start: 3.10, end: 3.65 },
+        { id: "#cue-8", start: 3.65, end: 4.35 },
+        { id: "#cue-9", start: 4.35, end: 4.90 },
+        { id: "#cue-10", start: 4.90, end: 5.55 },
+        { id: "#cue-11", start: 5.55, end: 6.30 }
+      ];
+
+      captionCues.forEach(c => {
+        // Entrance: quick scale-in bounce in 100ms
+        tl.fromTo(c.id, { opacity: 0, scale: 0.75, display: "block" }, { opacity: 1, scale: 1.05, duration: 0.10, ease: "back.out(2)" }, c.start);
+        tl.to(c.id, { scale: 1.0, duration: 0.04 }, c.start + 0.10);
+        // Exit
+        tl.to(c.id, { opacity: 0, duration: 0.03 }, c.end);
+        tl.set(c.id, { display: "none" }, c.end + 0.03);
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

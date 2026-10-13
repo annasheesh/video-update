@@ -1,0 +1,161 @@
+{
+  "project_metadata": {
+    "project_name": "High-Retention Animated Video Overlays & Sound Design",
+    "framework": "HyperFrames (HTML5 + GSAP + Headless Chromium Engine)",
+    "source_video": "example vid/source_video.mp4",
+    "master_output": "video-projects/high-retention-overlays/renders/final_video.mp4",
+    "resolution": {
+      "width": 1080,
+      "height": 1920,
+      "aspect_ratio": "9:16"
+    },
+    "frame_rate": 60.0,
+    "duration_seconds": 15.45,
+    "audio_spec": {
+      "sample_rate_hz": 48000,
+      "integrated_loudness_lufs": -14.0,
+      "true_peak_dbtp": -1.0,
+      "speech_ducking_applied": true
+    },
+    "visual_frequency_rule": "New meaningful visual and auditory event every 1.5 - 3.0 seconds (5 overlay scenes, 8 kinetic caption beats, 12 SFX cues)"
+  },
+  "visual_scenes": [
+    {
+      "scene_index": 1,
+      "start_time": 0.0,
+      "end_time": 3.2,
+      "duration": 3.2,
+      "title": "Raw in. Edit out.",
+      "narrative_theme": "Hook & Video Introduction",
+      "spoken_dialogue": "Hi, this is an example video that I'm using.",
+      "composition_file": "compositions/scene1.html",
+      "spatial_layout": {
+        "title_position": { "x": 80, "y": 60 },
+        "left_card": { "x": 80, "y": 150, "width": 530, "height": 290 },
+        "thumbnail": { "width": 150, "height": 235 },
+        "connector_line": { "x": 615, "y": 295, "width": 110 },
+        "claude_button": { "x": 735, "y": 185, "width": 220, "height": 220 },
+        "speaker_face_clearance_px": 280
+      },
+      "animation": {
+        "entrance": "Scale-up with back.out(1.5) spring settle",
+        "connector": "Animated draw-on line reveal",
+        "exit": "Smooth scale-down fade out"
+      },
+      "synchronized_sfx": [
+        { "time": 0.05, "file": "assets/sfx/sfx_whoosh_smooth.wav", "gain_db": -5.0, "event": "Scene 1 Entrance Whoosh" },
+        { "time": 0.42, "file": "assets/sfx/sfx_ui_pop.wav", "gain_db": -6.0, "event": "UI Pop on speaker intro card" },
+        { "time": 1.25, "file": "assets/sfx/sfx_blip.wav", "gain_db": -8.0, "event": "UI Blip on Claude editing button" }
+      ]
+    },
+    {
+      "scene_index": 2,
+      "start_time": 3.2,
+      "end_time": 6.5,
+      "duration": 3.3,
+      "title": "This tool",
+      "narrative_theme": "Pointing to AI Motion Tool (HyperFrames Repo)",
+      "spoken_dialogue": "Now you can see this animation up here...",
+      "composition_file": "compositions/scene2.html",
+      "spatial_layout": {
+        "title_position": { "x": 80, "y": 60 },
+        "github_3d_card": { "x": 80, "y": 150, "perspective": "900px", "rotationY": "-8deg", "rotationX": "4deg" },
+        "github_badge": { "x": 520, "y": 175 },
+        "finger_point_target": { "x": 280, "y": 480 },
+        "speaker_face_clearance_px": 120
+      },
+      "animation": {
+        "entrance": "Slide-in from left with scale bounce",
+        "interactive_accent": "Pulsing radial glow and scale punch at t=4.5s synchronized with speaker finger point",
+        "exit": "Slide-up fade"
+      },
+      "synchronized_sfx": [
+        { "time": 3.20, "file": "assets/sfx/sfx_whoosh_smooth.wav", "gain_db": -5.0, "event": "Whoosh transition into GitHub tool card" },
+        { "time": 4.50, "file": "assets/sfx/sfx_ui_pop.wav", "gain_db": -6.0, "event": "UI Pop on speaker finger point upwards" },
+        { "time": 5.35, "file": "assets/sfx/sfx_ui_click.wav", "gain_db": -7.0, "event": "UI Click accent on 'animation up here'" }
+      ]
+    },
+    {
+      "scene_index": 3,
+      "start_time": 6.5,
+      "end_time": 8.8,
+      "duration": 2.3,
+      "title": "HyperFrames",
+      "narrative_theme": "Open Source & Free Licensing Verification",
+      "spoken_dialogue": "...that I'm using this from AI,",
+      "composition_file": "compositions/scene3.html",
+      "spatial_layout": {
+        "title_position": { "x": 80, "y": 60 },
+        "github_card": { "x": 80, "y": 150 },
+        "pill_open_source": { "x": 520, "y": 170 },
+        "pill_apache": { "x": 520, "y": 230 },
+        "typography_free": { "x": 520, "y": 300, "font_size": 140 },
+        "underline_bar": { "width": 320, "height": 12 }
+      },
+      "animation": {
+        "entrance": "Staggered pill pop-in",
+        "accent": "Giant bold 'FREE' stamp with underline wipe",
+        "exit": "Quick collapse wipe"
+      },
+      "synchronized_sfx": [
+        { "time": 6.50, "file": "assets/sfx/sfx_tick.wav", "gain_db": -8.0, "event": "Tick on 'OPEN SOURCE' pill reveal" },
+        { "time": 7.30, "file": "assets/sfx/sfx_impact.wav", "gain_db": -6.0, "event": "Impact bass accent on bold 'FREE' stamp" }
+      ]
+    },
+    {
+      "scene_index": 4,
+      "start_time": 8.8,
+      "end_time": 11.5,
+      "duration": 2.7,
+      "title": "This entire video",
+      "narrative_theme": "Zero Human Editing Demonstration",
+      "spoken_dialogue": "which I didn't edit on my own,",
+      "composition_file": "compositions/scene4.html",
+      "spatial_layout": {
+        "title_position": { "x": 80, "y": 60 },
+        "prohibition_icon": { "x": 120, "y": 170, "width": 250, "height": 250 },
+        "edits_label": { "x": 480, "y": 170 },
+        "giant_zero": { "font_size": 210 },
+        "chest_quote": { "bottom": 240, "font_size": 58 }
+      },
+      "animation": {
+        "entrance": "Red prohibition circle stamp with rotation settle",
+        "accent": "Impact stamp on giant '0' and underlined chest quote",
+        "exit": "Directional slide-up dissolve"
+      },
+      "synchronized_sfx": [
+        { "time": 8.80, "file": "assets/sfx/sfx_swish.wav", "gain_db": -6.0, "event": "Swish on prohibition circle entrance" },
+        { "time": 10.00, "file": "assets/sfx/sfx_clack.wav", "gain_db": -6.0, "event": "Clack stamp on 'EDITS BY ME: 0'" }
+      ]
+    },
+    {
+      "scene_index": 5,
+      "start_time": 11.5,
+      "end_time": 15.45,
+      "duration": 3.95,
+      "title": "Automated Pipeline",
+      "narrative_theme": "AI Agent Architecture & Pipeline Resolution",
+      "spoken_dialogue": "and this is how I will talk to you, and this is how I will show you how to do it.",
+      "composition_file": "compositions/scene5.html",
+      "spatial_layout": {
+        "title_position": { "x": 80, "y": 60 },
+        "pipeline_panel": { "x": 70, "y": 150, "width": 940, "height": 330 },
+        "nodes": [
+          { "name": "RAW VIDEO", "spec": "4K 60FPS", "accent": "blue" },
+          { "name": "AI AGENT", "spec": "HYPERFRAMES", "accent": "purple" },
+          { "name": "MASTER VIDEO", "spec": "1080x1920", "accent": "green" }
+        ],
+        "automated_badge": { "label": "✓ 100% AUTOMATED" }
+      },
+      "animation": {
+        "entrance": "Sequential node activation with pop-in arrows",
+        "accent": "Pulsing radiant glow on '100% AUTOMATED' status badge",
+        "exit": "Hold to end of video for confident payoff"
+      },
+      "synchronized_sfx": [
+        { "time": 11.50, "file": "assets/sfx/sfx_marker.wav", "gain_db": -7.0, "event": "Marker swoosh on automated pipeline card" },
+        { "time": 13.30, "file": "assets/sfx/sfx_shimmer.wav", "gain_db": -7.0, "event": "Shimmer chime on 100% AUTOMATED badge" }
+      ]
+    }
+  ]
+}

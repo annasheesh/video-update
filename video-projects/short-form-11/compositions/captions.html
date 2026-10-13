@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Warm Aesthetic Captions</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: transparent;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+      }
+      #captions-root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .captions-wrap {
+        position: absolute;
+        bottom: 240px;
+        left: 0;
+        width: 1080px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding: 0 44px;
+      }
+
+      /* Bold Aesthetic Typography (Ref 1 Style) */
+      .caption-text {
+        font-size: 52px;
+        font-weight: 800;
+        letter-spacing: -0.015em;
+        color: #F5F0E8; /* Warm Ivory */
+        -webkit-text-stroke: 1.5px #302820; /* Deep Espresso stroke */
+        text-shadow: 
+          0 2px 8px rgba(48, 40, 32, 0.95),
+          0 8px 24px rgba(48, 40, 32, 0.9),
+          0 0 2px #302820;
+        display: none;
+        line-height: 1.25;
+        max-width: 960px;
+      }
+
+      /* Warm Caramel Bronze Highlight #A68B65 */
+      .hl-bronze {
+        color: #A68B65;
+        -webkit-text-stroke: 1.5px #302820;
+        text-shadow: 
+          0 0 22px rgba(166, 139, 101, 0.85),
+          0 2px 8px rgba(48, 40, 32, 0.95);
+      }
+
+      /* Soft Warm Sand Highlight #C8B9A6 */
+      .hl-sand {
+        color: #C8B9A6;
+        -webkit-text-stroke: 1.5px #302820;
+        text-shadow: 
+          0 0 18px rgba(200, 185, 166, 0.75),
+          0 2px 8px rgba(48, 40, 32, 0.95);
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-cap-root" id="captions-root" data-composition-id="captions" data-duration="15.45" data-width="1080" data-height="1920">
+      <div class="captions-wrap">
+        <div id="c1" class="caption-text">Hi, this is an</div>
+        <div id="c2" class="caption-text"><span class="hl-bronze">example video</span> that I'm using</div>
+        <div id="c3" class="caption-text">Now you can see</div>
+        <div id="c4" class="caption-text"><span class="hl-bronze">this animation</span> <span class="hl-sand">up here</span></div>
+        <div id="c5" class="caption-text">that I'm using <span class="hl-bronze">from AI</span></div>
+        <div id="c6" class="caption-text">which I <span class="hl-bronze">didn't edit</span> on my own</div>
+        <div id="c7" class="caption-text">and this is how I will <span class="hl-sand">talk to you</span></div>
+        <div id="c8" class="caption-text">and how I will show you <span class="hl-bronze">how to do it</span></div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const beats = [
+        { id: "#c1", start: 0.35, end: 1.25 },
+        { id: "#c2", start: 1.25, end: 3.40 },
+        { id: "#c3", start: 3.40, end: 4.50 },
+        { id: "#c4", start: 4.50, end: 6.60 },
+        { id: "#c5", start: 6.60, end: 8.60 },
+        { id: "#c6", start: 8.60, end: 11.35 },
+        { id: "#c7", start: 11.35, end: 13.25 },
+        { id: "#c8", start: 13.25, end: 15.35 }
+      ];
+
+      beats.forEach(({ id, start, end }) => {
+        tl.set(id, { display: "block", opacity: 0, scale: 0.94, y: 10 }, start);
+        tl.to(id, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "power2.out" }, start);
+        tl.to(id, { opacity: 0, scale: 1.02, duration: 0.10, ease: "power2.in" }, end - 0.10);
+        tl.set(id, { display: "none" }, end);
+      });
+
+      tl.set({}, {}, 15.45);
+      window.__timelines["captions"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

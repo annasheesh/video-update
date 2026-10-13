@@ -1,0 +1,24 @@
+{
+  "audio_profile": {
+    "target_loudness_lufs": -14.0,
+    "true_peak_limit_dbtp": -1.0,
+    "loudness_range_lu": 7.0,
+    "primary_speech_track": "assets/speech.mp3",
+    "master_output_track": "assets/master_audio.mp3",
+    "total_duration_sec": 15.45
+  },
+  "sound_effects": [
+    { "timestamp_sec": 0.05, "filename": "assets/sfx/sfx_whoosh_smooth.wav", "gain_db": -5.0, "category": "Motion", "description": "Scene 1 Entrance Whoosh" },
+    { "timestamp_sec": 0.42, "filename": "assets/sfx/sfx_ui_pop.wav", "gain_db": -6.0, "category": "Interface", "description": "UI Pop on speaker intro card" },
+    { "timestamp_sec": 1.25, "filename": "assets/sfx/sfx_blip.wav", "gain_db": -8.0, "category": "Interface", "description": "UI Blip on Claude editing button" },
+    { "timestamp_sec": 3.20, "filename": "assets/sfx/sfx_whoosh_smooth.wav", "gain_db": -5.0, "category": "Motion", "description": "Whoosh transition into GitHub tool card" },
+    { "timestamp_sec": 4.50, "filename": "assets/sfx/sfx_ui_pop.wav", "gain_db": -6.0, "category": "Interface", "description": "UI Pop on speaker finger point upwards" },
+    { "timestamp_sec": 5.35, "filename": "assets/sfx/sfx_ui_click.wav", "gain_db": -7.0, "category": "Interface", "description": "UI Click accent on 'animation up here'" },
+    { "timestamp_sec": 6.50, "filename": "assets/sfx/sfx_tick.wav", "gain_db": -8.0, "category": "Information", "description": "Tick on 'OPEN SOURCE' pill reveal" },
+    { "timestamp_sec": 7.30, "filename": "assets/sfx/sfx_impact.wav", "gain_db": -6.0, "category": "Emphasis", "description": "Impact bass accent on bold 'FREE' stamp" },
+    { "timestamp_sec": 8.80, "filename": "assets/sfx/sfx_swish.wav", "gain_db": -6.0, "category": "Motion", "description": "Swish on prohibition circle entrance" },
+    { "timestamp_sec": 10.00, "filename": "assets/sfx/sfx_clack.wav", "gain_db": -6.0, "category": "Emphasis", "description": "Clack stamp on 'EDITS BY ME: 0'" },
+    { "timestamp_sec": 11.50, "filename": "assets/sfx/sfx_marker.wav", "gain_db": -7.0, "category": "Information", "description": "Marker swoosh on automated pipeline card entrance" },
+    { "timestamp_sec": 13.30, "filename": "assets/sfx/sfx_shimmer.wav", "gain_db": -7.0, "category": "Success", "description": "Shimmer chime on 100% AUTOMATED checkmark" }
+  ]
+}

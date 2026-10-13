@@ -1,0 +1,147 @@
+{
+  "full_text": "Because eventually, whether you start now or whether you start later, you will hit that age where you don't even have that much time anymore.",
+  "duration_seconds": 6.3,
+  "segments": [
+    {
+      "id": 0,
+      "output_start": 0.0,
+      "output_end": 3.1,
+      "text": "Because eventually, whether you start now or whether you start later,",
+      "words": [
+        {
+          "word": "Because",
+          "start": 0.0,
+          "end": 0.45
+        },
+        {
+          "word": "eventually,",
+          "start": 0.45,
+          "end": 0.95
+        },
+        {
+          "word": "whether",
+          "start": 0.95,
+          "end": 1.25
+        },
+        {
+          "word": "you",
+          "start": 1.25,
+          "end": 1.45
+        },
+        {
+          "word": "start",
+          "start": 1.45,
+          "end": 1.7
+        },
+        {
+          "word": "now",
+          "start": 1.7,
+          "end": 2.05
+        },
+        {
+          "word": "or",
+          "start": 2.05,
+          "end": 2.3
+        },
+        {
+          "word": "whether",
+          "start": 2.3,
+          "end": 2.5
+        },
+        {
+          "word": "you",
+          "start": 2.5,
+          "end": 2.65
+        },
+        {
+          "word": "start",
+          "start": 2.65,
+          "end": 2.8
+        },
+        {
+          "word": "later,",
+          "start": 2.8,
+          "end": 3.1
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "output_start": 3.1,
+      "output_end": 6.3,
+      "text": "you will hit that age where you don't even have that much time anymore.",
+      "words": [
+        {
+          "word": "you",
+          "start": 3.1,
+          "end": 3.35
+        },
+        {
+          "word": "will",
+          "start": 3.35,
+          "end": 3.6
+        },
+        {
+          "word": "hit",
+          "start": 3.6,
+          "end": 3.9
+        },
+        {
+          "word": "that",
+          "start": 3.9,
+          "end": 4.15
+        },
+        {
+          "word": "age",
+          "start": 4.15,
+          "end": 4.45
+        },
+        {
+          "word": "where",
+          "start": 4.45,
+          "end": 4.7
+        },
+        {
+          "word": "you",
+          "start": 4.7,
+          "end": 4.85
+        },
+        {
+          "word": "don't",
+          "start": 4.85,
+          "end": 5.05
+        },
+        {
+          "word": "even",
+          "start": 5.05,
+          "end": 5.25
+        },
+        {
+          "word": "have",
+          "start": 5.25,
+          "end": 5.5
+        },
+        {
+          "word": "that",
+          "start": 5.5,
+          "end": 5.7
+        },
+        {
+          "word": "much",
+          "start": 5.7,
+          "end": 5.9
+        },
+        {
+          "word": "time",
+          "start": 5.9,
+          "end": 6.1
+        },
+        {
+          "word": "anymore.",
+          "start": 6.1,
+          "end": 6.3
+        }
+      ]
+    }
+  ]
+}

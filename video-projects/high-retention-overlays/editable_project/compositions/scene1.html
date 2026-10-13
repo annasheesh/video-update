@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Scene 1 - Raw In Edit Out</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: transparent;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      #scene1-root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      /* Headline above speaker */
+      .scene-title {
+        position: absolute;
+        top: 60px;
+        left: 80px;
+        font-size: 64px;
+        font-weight: 800;
+        color: #ffffff;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+        letter-spacing: -0.02em;
+      }
+
+      /* Video File Card */
+      .card-left {
+        position: absolute;
+        top: 150px;
+        left: 80px;
+        width: 530px;
+        height: 290px;
+        background: rgba(22, 27, 34, 0.90);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 28px;
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        padding: 24px;
+        gap: 24px;
+        backdrop-filter: blur(16px);
+      }
+      .card-thumb {
+        width: 150px;
+        height: 235px;
+        border-radius: 16px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .card-filename {
+        font-size: 30px;
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.01em;
+      }
+      .card-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 20px;
+        font-weight: 700;
+        color: #e2e8f0;
+        width: fit-content;
+      }
+
+      /* Connecting Line */
+      .connector {
+        position: absolute;
+        top: 295px;
+        left: 615px;
+        width: 110px;
+        height: 3px;
+        background: repeating-linear-gradient(90deg, #ffffff 0, #ffffff 10px, transparent 10px, transparent 18px);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      }
+
+      /* Claude / Editing Button */
+      .card-right {
+        position: absolute;
+        top: 185px;
+        left: 735px;
+        width: 220px;
+        height: 220px;
+        background: #ffffff;
+        border-radius: 36px;
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .claude-icon {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+      }
+      .editing-label {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        color: #94a3b8;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-waeb" id="scene1-root" data-composition-id="scene1" data-duration="3.2" data-width="1080" data-height="1920">
+      <div data-hf-id="hf-biu2" id="s1Title" class="scene-title">Raw in. Edit out.</div>
+
+      <div data-hf-id="hf-q94r" id="s1CardLeft" class="card-left">
+        <img data-hf-id="hf-hqwq" id="s1Thumb" src="../assets/images/speaker_thumb.jpg" alt="Raw Video" class="card-thumb">
+        <div data-hf-id="hf-1ftl" id="s1Info" class="card-info">
+          <div data-hf-id="hf-ge1i" id="s1Name" class="card-filename">IMG_2012.MOV</div>
+          <div data-hf-id="hf-ut9z" id="s1Badge" class="card-badge">3:23 RAW</div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-ht2l" id="s1Line" class="connector"></div>
+
+      <div data-hf-id="hf-vp2r" id="s1CardRight" class="card-right">
+        <img data-hf-id="hf-x676" id="s1Icon" src="../assets/images/claude_crop.png" alt="Claude" class="claude-icon">
+        <span data-hf-id="hf-y0zm" id="s1Label" class="editing-label">EDITING</span>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Initial States
+      gsap.set("#s1Title", { opacity: 0, y: -25 });
+      gsap.set("#s1CardLeft", { opacity: 0, scale: 0.85, y: 30 });
+      gsap.set("#s1Line", { scaleX: 0, transformOrigin: "left center" });
+      gsap.set("#s1CardRight", { opacity: 0, scale: 0.7, rotation: -10 });
+
+      // Entrance Animations
+      tl.to("#s1Title", { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.05);
+      tl.to("#s1CardLeft", { opacity: 1, scale: 1, y: 0, duration: 0.55, ease: "back.out(1.5)" }, 0.25);
+      tl.to("#s1Line", { scaleX: 1, duration: 0.4, ease: "power2.out" }, 0.75);
+      tl.to("#s1CardRight", { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.8)" }, 1.05);
+
+      // Subtle float
+      tl.to("#s1CardLeft", { y: -8, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1.2);
+      tl.to("#s1CardRight", { y: -6, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1.3);
+
+      // Exit Animation
+      tl.to(["#s1Title", "#s1CardLeft", "#s1Line", "#s1CardRight"], {
+        opacity: 0,
+        scale: 0.92,
+        y: -30,
+        duration: 0.35,
+        ease: "power2.in"
+      }, 2.85);
+
+      window.__timelines["scene1"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

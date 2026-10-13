@@ -1,0 +1,19 @@
+{
+  "name": "hyperframes-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preflight": "node scripts/preflight.mjs",
+    "preflight:all": "node scripts/preflight-all.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "hyperframes": "^0.8.149",
+    "playwright": "^1.59.1"
+  }
+}

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Scene 3 - This Entire Video / Edits By Me: 0</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: transparent;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+      }
+      #scene3-root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .scene-content {
+        position: absolute;
+        top: 36px;
+        left: 54px;
+        width: 972px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* Headline (Direct Ref 1 detail_08.jpg: "This entire video") */
+      .headline-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-left: 6px;
+      }
+      .top-title {
+        font-size: 52px;
+        font-weight: 800;
+        color: #F5F0E8;
+        letter-spacing: -0.02em;
+        text-shadow: 0 4px 18px rgba(48, 40, 32, 0.95);
+      }
+      .title-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #A68B65;
+        box-shadow: 0 0 16px #A68B65;
+      }
+
+      /* Big Render & Assembly Card in Deep Espresso #302820 */
+      .render-main-card {
+        width: 100%;
+        background: rgba(48, 40, 32, 0.95);
+        border: 2px solid rgba(200, 185, 166, 0.45);
+        border-radius: 28px;
+        padding: 22px 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        box-shadow: 0 24px 60px rgba(48, 40, 32, 0.9);
+        backdrop-filter: blur(24px);
+      }
+
+      /* Filmstrip: 6 Big Frame Pictures */
+      .filmstrip-strip {
+        display: flex;
+        gap: 12px;
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .film-thumb {
+        flex: 1;
+        height: 105px;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 2px solid rgba(200, 185, 166, 0.45);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+        background: #302820;
+        position: relative;
+      }
+      .film-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Ref 1 Signature Move Row: Circular Cursor + EDITS BY ME: 0 (detail_08.jpg) */
+      .ref1-edits-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(30, 24, 18, 0.55);
+        border: 1px solid rgba(200, 185, 166, 0.3);
+        border-radius: 18px;
+        padding: 10px 20px;
+      }
+
+      .cursor-group {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .circle-cursor {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2.5px solid #F5F0E8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 16px rgba(245, 240, 232, 0.4);
+      }
+      .circle-cursor svg {
+        width: 24px;
+        height: 24px;
+        fill: #F5F0E8;
+      }
+      .edits-label {
+        font-size: 20px;
+        font-weight: 800;
+        color: #C8B9A6;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .edits-zero {
+        font-size: 38px;
+        font-weight: 900;
+        color: #F5F0E8;
+        line-height: 1;
+        text-shadow: 0 0 16px rgba(166, 139, 101, 0.8);
+      }
+
+      .frames-badge-small {
+        background: rgba(166, 139, 101, 0.25);
+        border: 1.5px solid rgba(166, 139, 101, 0.65);
+        padding: 6px 16px;
+        border-radius: 999px;
+        font-size: 17px;
+        font-weight: 800;
+        color: #F5F0E8;
+        letter-spacing: 0.05em;
+      }
+
+      /* BIG PROMINENT RENDER PROGRESS BAR */
+      .render-bar-row {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        background: rgba(30, 24, 18, 0.6);
+        padding: 14px 20px;
+        border-radius: 18px;
+        border: 1px solid rgba(200, 185, 166, 0.25);
+      }
+      .render-label {
+        font-size: 26px;
+        font-weight: 900;
+        color: #F5F0E8;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        width: 130px;
+      }
+      .progress-track {
+        flex: 1;
+        height: 22px;
+        background: rgba(200, 185, 166, 0.2);
+        border-radius: 999px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(200, 185, 166, 0.3);
+      }
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #A68B65, #E5DED4, #F5F0E8);
+        border-radius: 999px;
+        box-shadow: 0 0 16px rgba(166, 139, 101, 0.9), 0 0 30px #A68B65;
+      }
+      .percent-text {
+        font-size: 26px;
+        font-weight: 900;
+        color: #A68B65;
+        font-variant-numeric: tabular-nums;
+        width: 80px;
+        text-align: right;
+      }
+
+      /* Big Final MP4 Badge */
+      .final-badge-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .final-mp4-pill {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #A68B65;
+        border: 2px solid #F5F0E8;
+        padding: 10px 24px;
+        border-radius: 999px;
+        box-shadow: 0 12px 30px rgba(166, 139, 101, 0.5);
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      .check-circle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #F5F0E8;
+        color: #302820;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 900;
+      }
+      .final-text {
+        font-size: 22px;
+        font-weight: 800;
+        color: #F5F0E8;
+        letter-spacing: 0.02em;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-s3-root" id="scene3-root" data-composition-id="scene3" data-duration="4.6" data-width="1080" data-height="1920">
+      <div class="scene-content">
+        <!-- Headline -->
+        <div id="headlineWrap" class="headline-wrap">
+          <div class="top-title">This entire video</div>
+          <div class="title-dot"></div>
+        </div>
+
+        <!-- Big Render Main Card -->
+        <div id="renderCard" class="render-main-card">
+          <!-- Filmstrip: 6 Big Pictures -->
+          <div id="filmstrip" class="filmstrip-strip">
+            <div class="film-thumb"><img src="../assets/images/thumb_01.jpg" alt="1"></div>
+            <div class="film-thumb"><img src="../assets/images/thumb_02.jpg" alt="2"></div>
+            <div class="film-thumb"><img src="../assets/images/thumb_03.jpg" alt="3"></div>
+            <div class="film-thumb"><img src="../assets/images/thumb_04.jpg" alt="4"></div>
+            <div class="film-thumb"><img src="../assets/images/thumb_05.jpg" alt="5"></div>
+            <div class="film-thumb"><img src="../assets/images/thumb_06.jpg" alt="6"></div>
+          </div>
+
+          <!-- Ref 1 Signature Move: Cursor Icon + EDITS BY ME: 0 (detail_08.jpg) -->
+          <div id="editsRow" class="ref1-edits-row">
+            <div class="cursor-group">
+              <div class="circle-cursor">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 4l7 17 2.5-6.5L20 12 4 4z"/>
+                </svg>
+              </div>
+              <span class="edits-label">EDITS BY ME</span>
+              <span class="edits-zero">0</span>
+            </div>
+            <div class="frames-badge-small">✓ 464 FRAMES</div>
+          </div>
+
+          <!-- Big RENDER Progress Bar Row -->
+          <div id="renderBarRow" class="render-bar-row">
+            <div class="render-label">RENDER</div>
+            <div class="progress-track">
+              <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <div id="percentText" class="percent-text">0%</div>
+          </div>
+
+          <!-- ✓ final.mp4 Badge -->
+          <div class="final-badge-wrap">
+            <div id="finalPill" class="final-mp4-pill">
+              <div class="check-circle">✓</div>
+              <div class="final-text">final.mp4 ready</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Entrances
+      tl.from("#headlineWrap", { y: -30, opacity: 0, duration: 0.35, ease: "power2.out" }, 0.1);
+      tl.from("#renderCard", { y: -30, opacity: 0, scale: 0.95, duration: 0.45, ease: "power3.out" }, 0.25);
+      tl.from(".film-thumb", { y: -20, opacity: 0, stagger: 0.05, duration: 0.35, ease: "back.out(1.5)" }, 0.35);
+      tl.from("#editsRow", { y: 15, opacity: 0, duration: 0.3, ease: "power2.out" }, 0.55);
+
+      // Big Progress bar animation 0% to 100%
+      tl.to("#progressFill", { width: "100%", duration: 2.3, ease: "power1.inOut" }, 0.85);
+
+      // Percent text update
+      const percentEl = document.getElementById("percentText");
+      const progressObj = { value: 0 };
+      tl.to(progressObj, {
+        value: 100,
+        duration: 2.3,
+        ease: "power1.inOut",
+        onUpdate: function() {
+          percentEl.textContent = Math.round(progressObj.value) + "%";
+        }
+      }, 0.85);
+
+      // Final MP4 badge pops in right as progress bar finishes (3.15s)
+      tl.to("#finalPill", { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 3.15);
+
+      // Exit
+      tl.to(".scene-content", { y: -40, opacity: 0, duration: 0.3, ease: "power2.in" }, 4.25);
+
+      tl.set({}, {}, 4.6);
+      window.__timelines["scene3"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

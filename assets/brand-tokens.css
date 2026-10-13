@@ -1,0 +1,17 @@
+:root {
+  /* Hormozi High-Energy Palette */
+  --brand-bg: #000000;
+  --brand-surface: #101014;
+  --brand-surface-2: #1c1c24;
+  --brand-border: #2a2a36;
+  --brand-accent: #00FF66;
+  --brand-accent-glow: rgba(0, 255, 102, 0.4);
+  --brand-warn: #FF3B30;
+  --brand-highlight: #FFDF00;
+  --brand-text: #ffffff;
+  --brand-text-dim: #a1a1aa;
+
+  /* Typography */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: 'Montserrat', 'Impact', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}

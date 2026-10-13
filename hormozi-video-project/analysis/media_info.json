@@ -1,0 +1,27 @@
+{
+  "file_name": "original_video.mov",
+  "file_path": "C:\\Users\\sanfu\\Documents\\antigravity\\amazing-hertz\\hormozi-video-project\\input\\original_video.mov",
+  "file_size_bytes": 131053898,
+  "duration_seconds": 11.833333,
+  "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+  "bit_rate": 88599820,
+  "video": {
+    "codec_name": "hevc",
+    "width": 3840,
+    "height": 2160,
+    "r_frame_rate": "60/1",
+    "avg_frame_rate": "60/1",
+    "pix_fmt": "yuv420p",
+    "rotation": 90,
+    "display_width": 1080,
+    "display_height": 1920,
+    "is_portrait": true
+  },
+  "audio": {
+    "codec_name": "aac",
+    "sample_rate": 48000,
+    "channels": 2,
+    "channel_layout": "stereo",
+    "bit_rate": 178789
+  }
+}

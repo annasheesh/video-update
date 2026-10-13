@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Kinetic Captions</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: transparent;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      #captions-root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      /* Captions Container */
+      .captions-wrap {
+        position: absolute;
+        bottom: 240px;
+        left: 0;
+        width: 1080px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding: 0 40px;
+      }
+
+      .caption-text {
+        font-size: 54px;
+        font-weight: 900;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        color: #ffffff;
+        -webkit-text-stroke: 4px #000000;
+        text-shadow: 0 8px 24px rgba(0, 0, 0, 0.9);
+        display: none;
+        line-height: 1.25;
+      }
+
+      .highlight-yellow {
+        color: #facc15;
+      }
+      .highlight-blue {
+        color: #60a5fa;
+      }
+      .highlight-green {
+        color: #4ade80;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-g2s1" id="captions-root" data-composition-id="captions" data-duration="15.45" data-width="1080" data-height="1920">
+      <div data-hf-id="hf-dgdu" class="captions-wrap">
+        <div data-hf-id="hf-im6s" id="c1" class="caption-text">Hi, this is an</div>
+        <div data-hf-id="hf-ufal" id="c2" class="caption-text"><span data-hf-id="hf-nkhl" class="highlight-yellow">EXAMPLE VIDEO</span> that I'm using</div>
+        <div data-hf-id="hf-tju0" id="c3" class="caption-text">Now you can see</div>
+        <div data-hf-id="hf-s0f2" id="c4" class="caption-text"><span data-hf-id="hf-5bnq" class="highlight-blue">THIS ANIMATION</span> UP HERE</div>
+        <div data-hf-id="hf-hd56" id="c5" class="caption-text">that I'm using this <span data-hf-id="hf-xfd2" class="highlight-yellow">FROM AI</span></div>
+        <div data-hf-id="hf-voz8" id="c6" class="caption-text">which I <span data-hf-id="hf-yzwu" class="highlight-yellow">DIDN'T EDIT</span> on my own</div>
+        <div data-hf-id="hf-fpge" id="c7" class="caption-text">and this is how I will <span data-hf-id="hf-no5k" class="highlight-blue">TALK TO YOU</span></div>
+        <div data-hf-id="hf-32hx" id="c8" class="caption-text">and how I will show you <span data-hf-id="hf-u2c0" class="highlight-green">HOW TO DO IT</span></div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const beats = [
+        { id: "#c1", start: 0.1, end: 1.2 },
+        { id: "#c2", start: 1.2, end: 3.2 },
+        { id: "#c3", start: 3.2, end: 4.4 },
+        { id: "#c4", start: 4.4, end: 6.5 },
+        { id: "#c5", start: 6.5, end: 8.8 },
+        { id: "#c6", start: 8.8, end: 11.4 },
+        { id: "#c7", start: 11.4, end: 13.2 },
+        { id: "#c8", start: 13.2, end: 15.3 }
+      ];
+
+      beats.forEach(({ id, start, end }) => {
+        tl.set(id, { display: "block", opacity: 0, scale: 0.85, y: 15 }, start);
+        tl.to(id, { opacity: 1, scale: 1, y: 0, duration: 0.15, ease: "back.out(2)" }, start);
+        tl.to(id, { opacity: 0, scale: 1.05, duration: 0.12, ease: "power2.in" }, end - 0.12);
+        tl.set(id, { display: "none" }, end);
+      });
+
+      window.__timelines["captions"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

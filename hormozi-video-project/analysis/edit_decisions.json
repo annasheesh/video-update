@@ -1,0 +1,35 @@
+{
+  "source_file": "original_video.mov",
+  "total_source_duration": 11.833,
+  "total_output_duration": 6.3,
+  "cuts_summary": {
+    "lead_in_trimmed_sec": 1.05,
+    "mid_silence_and_repetition_cut_sec": 1.4,
+    "trailing_silence_trimmed_sec": 3.083,
+    "total_cut_duration_sec": 5.533
+  },
+  "timeline_segments": [
+    {
+      "segment_index": 1,
+      "source_start": 1.05,
+      "source_end": 4.15,
+      "output_start": 0.0,
+      "output_end": 3.1,
+      "duration": 3.1,
+      "spoken_text": "Because eventually, whether you start now or whether you start later,",
+      "camera_framing": "100% wide (original framing)",
+      "transition_to_next": "JUMP CUT with 110% camera punch-in"
+    },
+    {
+      "segment_index": 2,
+      "source_start": 5.55,
+      "source_end": 8.75,
+      "output_start": 3.1,
+      "output_end": 6.3,
+      "duration": 3.2,
+      "spoken_text": "you will hit that age where you don't even have that much time anymore.",
+      "camera_framing": "110% punch-in (centered on speaker face)",
+      "transition_to_next": "clean program end"
+    }
+  ]
+}

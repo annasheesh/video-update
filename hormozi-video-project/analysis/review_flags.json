@@ -1,0 +1,42 @@
+[
+  {
+    "segment_id": "FLAG_001",
+    "source_start": 0.0,
+    "source_end": 0.78,
+    "text": "because (first utterance)",
+    "flag_type": "false_start_repetition",
+    "action_taken": "REMOVE",
+    "rationale": "Speaker restarted sentence ('because, because eventually...'). Removing the hesitant false start allows the hook to begin with maximum energy and clarity.",
+    "human_review_status": "APPROVED_AUTO"
+  },
+  {
+    "segment_id": "FLAG_002",
+    "source_start": 3.98,
+    "source_end": 5.55,
+    "text": "you will (first take) + mid-sentence pause",
+    "flag_type": "repeated_phrase_and_pause",
+    "action_taken": "REMOVE",
+    "rationale": "Speaker repeats 'you will' twice with a 1.4s hesitation pause. Retaining the second, more confident take ('you will hit that age...') tightens delivery.",
+    "human_review_status": "APPROVED_AUTO"
+  },
+  {
+    "segment_id": "FLAG_003",
+    "source_start": 6.5,
+    "source_end": 6.76,
+    "text": "H -> age",
+    "flag_type": "phonetic_transcription_correction",
+    "action_taken": "CORRECT",
+    "rationale": "Phonetically transcribed as 'H' due to soft glottal onset; context confirms 'hit that age where you don't even have that much time anymore'.",
+    "human_review_status": "VERIFIED"
+  },
+  {
+    "segment_id": "FLAG_004",
+    "source_start": 8.75,
+    "source_end": 11.83,
+    "text": "[dead air / pause]",
+    "flag_type": "trailing_silence",
+    "action_taken": "TRIM",
+    "rationale": "Speaker completed thought; 3.08 seconds of post-speech silence and looking at camera. Trimmed for high retention.",
+    "human_review_status": "APPROVED_AUTO"
+  }
+]

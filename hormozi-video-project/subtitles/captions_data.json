@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "start": 0.0,
+    "end": 0.5,
+    "plain_text": "BECAUSE",
+    "html_text": "BECAUSE",
+    "highlight": null
+  },
+  {
+    "id": 2,
+    "start": 0.5,
+    "end": 1.1,
+    "plain_text": "EVENTUALLY",
+    "html_text": "<font color='#FFDF00'>EVENTUALLY</font>",
+    "highlight": "EVENTUALLY"
+  },
+  {
+    "id": 3,
+    "start": 1.1,
+    "end": 1.55,
+    "plain_text": "WHETHER YOU",
+    "html_text": "WHETHER YOU",
+    "highlight": null
+  },
+  {
+    "id": 4,
+    "start": 1.55,
+    "end": 2.1,
+    "plain_text": "START NOW",
+    "html_text": "START <font color='#00FF66'>NOW</font>",
+    "highlight": "NOW"
+  },
+  {
+    "id": 5,
+    "start": 2.1,
+    "end": 2.5,
+    "plain_text": "OR WHETHER",
+    "html_text": "OR WHETHER",
+    "highlight": null
+  },
+  {
+    "id": 6,
+    "start": 2.5,
+    "end": 3.1,
+    "plain_text": "START LATER,",
+    "html_text": "START <font color='#FF3B30'>LATER,</font>",
+    "highlight": "LATER"
+  },
+  {
+    "id": 7,
+    "start": 3.1,
+    "end": 3.65,
+    "plain_text": "YOU WILL",
+    "html_text": "YOU WILL",
+    "highlight": null
+  },
+  {
+    "id": 8,
+    "start": 3.65,
+    "end": 4.35,
+    "plain_text": "HIT THAT AGE",
+    "html_text": "HIT THAT <font color='#FFDF00'>AGE</font>",
+    "highlight": "AGE"
+  },
+  {
+    "id": 9,
+    "start": 4.35,
+    "end": 4.9,
+    "plain_text": "WHERE YOU",
+    "html_text": "WHERE YOU",
+    "highlight": null
+  },
+  {
+    "id": 10,
+    "start": 4.9,
+    "end": 5.55,
+    "plain_text": "DON'T EVEN HAVE",
+    "html_text": "<font color='#FF3B30'>DON'T</font> EVEN HAVE",
+    "highlight": "DON'T"
+  },
+  {
+    "id": 11,
+    "start": 5.55,
+    "end": 6.3,
+    "plain_text": "THAT MUCH TIME.",
+    "html_text": "THAT MUCH <font color='#FFDF00'>TIME.</font>",
+    "highlight": "TIME"
+  }
+]
