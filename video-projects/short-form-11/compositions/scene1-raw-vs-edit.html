@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1080, height=1920">
-    <title>Scene 1 - Raw In. Edit Out.</title>
+    <title>Scene 1 - AI Edit Suite Timeline HUD</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <style>
       * {
@@ -27,253 +27,370 @@
         pointer-events: none;
       }
 
-      .scene-content {
+      /* Sci-Fi HUD Outer Frame (softgirlnocode signature) */
+      .hud-outer-frame {
         position: absolute;
         top: 36px;
-        left: 54px;
-        width: 972px;
+        left: 50px;
+        width: 980px;
+        height: 480px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 28px;
+        background: rgba(10, 10, 14, 0.94);
+        backdrop-filter: blur(24px);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 122, 0, 0.12);
+        padding: 24px 28px;
         display: flex;
         flex-direction: column;
-        gap: 16px;
-      }
-
-      /* Headline (Direct Ref 1 detail_10.jpg: "Raw in. Edit out.") */
-      .headline-wrap {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding-left: 6px;
-      }
-      .top-title {
-        font-size: 52px;
-        font-weight: 800;
-        color: #F5F0E8;
-        letter-spacing: -0.02em;
-        text-shadow: 0 4px 18px rgba(48, 40, 32, 0.95);
-      }
-      .title-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #A68B65;
-        box-shadow: 0 0 16px #A68B65;
-      }
-
-      /* Big Pipeline Row: Media Card -> Connector -> Claude Card (Ref 1 Style) */
-      .pipeline-row {
-        width: 100%;
-        display: flex;
-        align-items: center;
         justify-content: space-between;
         position: relative;
       }
 
-      /* Left: Big Video Input Media Card (Ref 1 detail_10.jpg) */
-      .video-media-card {
-        background: rgba(48, 40, 32, 0.94);
-        border: 2px solid rgba(200, 185, 166, 0.45);
-        border-radius: 26px;
-        padding: 16px 24px;
+      /* HUD Corner Brackets */
+      .bracket {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border-color: rgba(255, 255, 255, 0.5);
+        border-style: solid;
+        pointer-events: none;
+      }
+      .bracket-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-top-left-radius: 28px; }
+      .bracket-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; border-top-right-radius: 28px; }
+      .bracket-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; border-bottom-left-radius: 28px; }
+      .bracket-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-bottom-right-radius: 28px; }
+
+      /* Top HUD Header Bar */
+      .hud-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .hud-brand {
         display: flex;
         align-items: center;
-        gap: 20px;
-        box-shadow: 0 24px 50px rgba(48, 40, 32, 0.85);
-        backdrop-filter: blur(24px);
-        width: 530px;
-        height: 175px;
+        gap: 8px;
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+      }
+      .hud-brand-bracket {
+        color: #FF7A00;
+        font-weight: 900;
       }
 
-      .video-thumb {
-        width: 110px;
-        height: 140px;
-        border-radius: 16px;
-        overflow: hidden;
-        border: 2px solid rgba(200, 185, 166, 0.5);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-        flex-shrink: 0;
+      /* Telemetry Tracker Badge & Leader Line */
+      .telemetry-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        position: relative;
       }
-      .video-thumb img {
+      .telemetry-text {
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+        letter-spacing: 0.08em;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .telemetry-val {
+        color: #00D2FF;
+        font-weight: 700;
+      }
+      .telemetry-val-orange {
+        color: #FF7A00;
+        font-weight: 700;
+      }
+      .tracking-bead {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #FF7A00;
+        box-shadow: 0 0 16px #FF7A00, 0 0 30px rgba(255, 122, 0, 0.6);
+        position: relative;
+      }
+      .tracking-bead::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 122, 0, 0.5);
+      }
+
+      /* Inner Timeline Glass Card (f006.jpg) */
+      .timeline-card {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .video-info {
+        background: rgba(20, 20, 26, 0.95);
+        border: 1.5px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        padding: 16px 20px;
         display: flex;
         flex-direction: column;
         gap: 12px;
-      }
-      .video-filename {
-        font-size: 34px;
-        font-weight: 800;
-        color: #F5F0E8;
-        letter-spacing: -0.01em;
-      }
-      .video-badge {
-        display: inline-flex;
-        align-items: center;
-        background: #C8B9A6;
-        color: #302820;
-        padding: 6px 18px;
-        border-radius: 999px;
-        font-size: 18px;
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        width: fit-content;
-      }
-
-      /* Animated Connector with Pulse Bead (Ref 1 detail_10.jpg) */
-      .connector-wrap {
-        flex: 1;
-        height: 4px;
-        background: rgba(166, 139, 101, 0.45);
-        margin: 0 18px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
         position: relative;
-        border-radius: 2px;
-      }
-      .pulse-bead {
-        position: absolute;
-        top: -8px;
-        left: 0;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #F5F0E8;
-        box-shadow: 0 0 16px #F5F0E8, 0 0 30px #A68B65;
+        overflow: hidden;
       }
 
-      /* Right: Claude Star Card (Ref 1 detail_03.jpg & detail_10.jpg) */
-      .claude-logo-card {
-        width: 155px;
-        height: 175px;
-        background: #F5F0E8;
-        border: 2px solid #A68B65;
-        border-radius: 26px;
+      /* Card Top: "EDIT TIMELINE" + Digital Timecode */
+      .timeline-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .timeline-card-title {
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        color: #FFFFFF;
+        text-transform: uppercase;
+      }
+      .timeline-timecode {
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 16px;
+        font-weight: 800;
+        color: #00D2FF;
+        letter-spacing: 0.08em;
+        background: rgba(0, 210, 255, 0.1);
+        padding: 3px 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(0, 210, 255, 0.3);
+      }
+
+      /* Time ruler tick line */
+      .time-ruler {
+        width: 100%;
+        height: 8px;
+        background: repeating-linear-gradient(90deg, rgba(255,255,255,0.4), rgba(255,255,255,0.4) 1px, transparent 1px, transparent 18px);
+        opacity: 0.6;
+      }
+
+      /* Multi-track Container */
+      .tracks-container {
         display: flex;
         flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        position: relative;
+      }
+
+      /* Track 1: Video Filmstrip */
+      .track-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+      }
+      .track-icon {
+        width: 24px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.5);
+        display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
-        box-shadow: 0 24px 50px rgba(48, 40, 32, 0.8), 0 0 35px rgba(166, 139, 101, 0.4);
-        flex-shrink: 0;
       }
-      .claude-star-icon {
-        width: 84px;
-        height: 84px;
-      }
-      .claude-label {
-        font-size: 17px;
-        font-weight: 800;
-        color: #302820;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-      }
-
-      /* Filmstrip Row with Pictures */
-      .filmstrip-panel {
-        width: 100%;
-        background: rgba(48, 40, 32, 0.92);
-        border: 2px solid rgba(200, 185, 166, 0.35);
-        border-radius: 22px;
-        padding: 14px 20px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        backdrop-filter: blur(20px);
-        box-shadow: 0 18px 40px rgba(48, 40, 32, 0.7);
-      }
-
-      .film-tag {
-        font-size: 18px;
-        font-weight: 800;
-        color: #C8B9A6;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        width: 140px;
-      }
-
-      .thumbs-container {
-        display: flex;
-        gap: 12px;
+      .filmstrip-strip {
         flex: 1;
+        height: 52px;
+        border-radius: 10px;
         overflow: hidden;
+        display: flex;
+        gap: 3px;
+        background: #111;
+        border: 1px solid rgba(255, 255, 255, 0.15);
       }
-
-      .thumb-card {
+      .filmstrip-thumb {
         flex: 1;
-        height: 80px;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1.5px solid rgba(200, 185, 166, 0.45);
-        position: relative;
-        background: #302820;
-      }
-      .thumb-card img {
-        width: 100%;
         height: 100%;
         object-fit: cover;
+        opacity: 0.85;
       }
 
-      .frames-badge {
-        background: rgba(166, 139, 101, 0.28);
-        border: 1.5px solid rgba(166, 139, 101, 0.7);
-        color: #F5F0E8;
-        padding: 8px 18px;
-        border-radius: 12px;
-        font-size: 18px;
+      /* Track 2: Overlays Pills */
+      .pill-track {
+        flex: 1;
+        height: 34px;
+        display: flex;
+        gap: 8px;
+      }
+      .clip-pill {
+        height: 100%;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        font-size: 13px;
         font-weight: 800;
         letter-spacing: 0.04em;
-        white-space: nowrap;
+        text-transform: uppercase;
+      }
+      .pill-cyan {
+        width: 38%;
+        background: rgba(0, 210, 255, 0.22);
+        color: #00D2FF;
+        border: 1px solid #00D2FF;
+      }
+      .pill-orange {
+        width: 44%;
+        background: rgba(255, 122, 0, 0.22);
+        color: #FF7A00;
+        border: 1px solid #FF7A00;
+      }
+
+      /* Track 3: Audio Soundwave */
+      .audio-track-bar {
+        flex: 1;
+        height: 28px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 0 10px;
+      }
+      .audio-wave-bar {
+        flex: 1;
+        background: linear-gradient(180deg, #00D2FF, #FF7A00);
+        border-radius: 2px;
+        opacity: 0.75;
+      }
+
+      /* Scrubbing Playhead Needle & Marker */
+      .playhead-needle {
+        position: absolute;
+        top: 36px;
+        left: 42px;
+        width: 2px;
+        height: 172px;
+        background: #FFFFFF;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 20px #00D2FF;
+        z-index: 10;
+        pointer-events: none;
+      }
+      .playhead-marker {
+        position: absolute;
+        top: -10px;
+        left: -6px;
+        width: 0;
+        height: 0;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 10px solid #FFFFFF;
+        filter: drop-shadow(0 0 6px #00D2FF);
+      }
+
+      /* Bottom Ruler Ticks */
+      .hud-bottom-ruler {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.35);
+        letter-spacing: 0.16em;
       }
     </style>
   </head>
   <body>
     <div data-hf-id="hf-s1-root" id="scene1-root" data-composition-id="scene1" data-duration="4.2" data-width="1080" data-height="1920">
-      <div class="scene-content">
-        <!-- Headline -->
-        <div id="headlineWrap" class="headline-wrap">
-          <div class="top-title">Raw in. Edit out.</div>
-          <div class="title-dot"></div>
-        </div>
+      <!-- Sci-Fi HUD Outer Frame -->
+      <div id="hudFrame" class="hud-outer-frame">
+        <!-- Corner Brackets -->
+        <div class="bracket bracket-tl"></div>
+        <div class="bracket bracket-tr"></div>
+        <div class="bracket bracket-bl"></div>
+        <div class="bracket bracket-br"></div>
 
-        <!-- Big Pipeline: Media Card -> Connector -> Big Claude Card -->
-        <div id="pipelineRow" class="pipeline-row">
-          <!-- Video Input Card -->
-          <div id="mediaCard" class="video-media-card">
-            <div class="video-thumb">
-              <img src="../assets/images/thumb_01.jpg" alt="Source Clip">
-            </div>
-            <div class="video-info">
-              <div class="video-filename">11.mp4</div>
-              <div class="video-badge">0:15 RAW</div>
-            </div>
+        <!-- Top Header: Brand + Live Telemetry -->
+        <div class="hud-header">
+          <div class="hud-brand">
+            <span class="hud-brand-bracket">┌</span> HYPERFRAMES / AI EDIT SUITE
           </div>
-
-          <!-- Connector -->
-          <div class="connector-wrap">
-            <div id="pulseBead" class="pulse-bead"></div>
-          </div>
-
-          <!-- Big Claude Card -->
-          <div id="claudeCard" class="claude-logo-card">
-            <svg class="claude-star-icon" viewBox="0 0 100 100" fill="none">
-              <path d="M50 10 L50 90 M10 50 L90 50 M22 22 L78 78 M22 78 L78 22" stroke="#A68B65" stroke-width="14" stroke-linecap="round"/>
-            </svg>
-            <span class="claude-label">Claude</span>
+          <div class="telemetry-wrap">
+            <div class="telemetry-text">
+              POS <span id="posVal" class="telemetry-val">1042.2</span> SCL <span class="telemetry-val-orange">136%</span> VEL <span class="telemetry-val">1952 px/s</span>
+            </div>
+            <div id="trackingBead" class="tracking-bead"></div>
           </div>
         </div>
 
-        <!-- Big Filmstrip Row with Pictures -->
-        <div id="filmstrip" class="filmstrip-panel">
-          <div class="film-tag">Raw Footage</div>
-          <div class="thumbs-container">
-            <div class="thumb-card"><img src="../assets/images/thumb_02.jpg" alt="2"></div>
-            <div class="thumb-card"><img src="../assets/images/thumb_03.jpg" alt="3"></div>
-            <div class="thumb-card"><img src="../assets/images/thumb_04.jpg" alt="4"></div>
-            <div class="thumb-card"><img src="../assets/images/thumb_05.jpg" alt="5"></div>
-            <div class="thumb-card"><img src="../assets/images/thumb_06.jpg" alt="6"></div>
+        <!-- The Interactive Edit Timeline Card -->
+        <div class="timeline-card">
+          <!-- Playhead Needle with Glowing Marker -->
+          <div id="playhead" class="playhead-needle">
+            <div class="playhead-marker"></div>
           </div>
-          <div class="frames-badge">✓ 464 FRAMES</div>
+
+          <!-- Card Header: Title + Timecode -->
+          <div class="timeline-card-header">
+            <div class="timeline-card-title">EDIT TIMELINE</div>
+            <div id="timecode" class="timeline-timecode">00:00:04</div>
+          </div>
+
+          <!-- Time Ruler -->
+          <div class="time-ruler"></div>
+
+          <!-- Tracks -->
+          <div class="tracks-container">
+            <!-- Track 1: Video Thumbnails Filmstrip -->
+            <div class="track-row">
+              <span class="track-icon">▣</span>
+              <div class="filmstrip-strip">
+                <img class="filmstrip-thumb" src="../assets/images/thumb_01.jpg" alt="thumb1">
+                <img class="filmstrip-thumb" src="../assets/images/thumb_02.jpg" alt="thumb2">
+                <img class="filmstrip-thumb" src="../assets/images/thumb_03.jpg" alt="thumb3">
+                <img class="filmstrip-thumb" src="../assets/images/thumb_04.jpg" alt="thumb4">
+                <img class="filmstrip-thumb" src="../assets/images/thumb_05.jpg" alt="thumb5">
+                <img class="filmstrip-thumb" src="../assets/images/thumb_06.jpg" alt="thumb6">
+              </div>
+            </div>
+
+            <!-- Track 2: Clip Blocks (Cyan & Orange Pills) -->
+            <div class="track-row">
+              <span class="track-icon">T</span>
+              <div class="pill-track">
+                <div class="clip-pill pill-cyan">■ AI Speech Align</div>
+                <div class="clip-pill pill-orange">■ Motion Graphics</div>
+              </div>
+            </div>
+
+            <!-- Track 3: Audio Soundwave -->
+            <div class="track-row">
+              <span class="track-icon">♪</span>
+              <div class="audio-track-bar">
+                <div class="audio-wave-bar" style="height: 14px;"></div>
+                <div class="audio-wave-bar" style="height: 22px;"></div>
+                <div class="audio-wave-bar" style="height: 10px;"></div>
+                <div class="audio-wave-bar" style="height: 18px;"></div>
+                <div class="audio-wave-bar" style="height: 26px;"></div>
+                <div class="audio-wave-bar" style="height: 12px;"></div>
+                <div class="audio-wave-bar" style="height: 20px;"></div>
+                <div class="audio-wave-bar" style="height: 16px;"></div>
+                <div class="audio-wave-bar" style="height: 24px;"></div>
+                <div class="audio-wave-bar" style="height: 14px;"></div>
+                <div class="audio-wave-bar" style="height: 18px;"></div>
+                <div class="audio-wave-bar" style="height: 22px;"></div>
+                <div class="audio-wave-bar" style="height: 12px;"></div>
+                <div class="audio-wave-bar" style="height: 26px;"></div>
+                <div class="audio-wave-bar" style="height: 16px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Ruler Ticks -->
+        <div class="hud-bottom-ruler">
+          ┴╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵┴
         </div>
       </div>
     </div>
@@ -282,21 +399,32 @@
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
 
-      // Entrances
-      tl.from("#headlineWrap", { y: -30, opacity: 0, duration: 0.35, ease: "power2.out" }, 0.1);
-      tl.from("#mediaCard", { x: -50, opacity: 0, scale: 0.94, duration: 0.45, ease: "back.out(1.5)" }, 0.3);
-      tl.from("#claudeCard", { x: 50, opacity: 0, scale: 0.8, duration: 0.45, ease: "back.out(1.8)" }, 0.45);
-      tl.from("#filmstrip", { y: 30, opacity: 0, duration: 0.4, ease: "power2.out" }, 0.85);
+      // HUD frame entrance
+      tl.from("#hudFrame", { y: -30, opacity: 0, scale: 0.96, duration: 0.45, ease: "power3.out" }, 0.1);
 
-      // Pulse bead travels via transform x
-      tl.fromTo("#pulseBead", { x: 0, opacity: 0 }, { x: 200, opacity: 1, duration: 0.6, ease: "power1.inOut" }, 0.5);
-      tl.to("#pulseBead", { opacity: 0, duration: 0.1 }, 1.1);
+      // Playhead scrubbing across timeline (from 0s to 3.8s)
+      tl.fromTo("#playhead", 
+        { x: 0 }, 
+        { x: 860, duration: 3.6, ease: "none" }, 
+        0.3
+      );
 
-      // Pulse glow on Claude card
-      tl.to("#claudeCard", { scale: 1.06, yoyo: true, repeat: 1, duration: 0.25, ease: "power2.out" }, 1.1);
+      // Digital timecode counter ticks
+      tl.set("#timecode", { textContent: "00:00:01" }, 0.8);
+      tl.set("#timecode", { textContent: "00:00:02" }, 1.6);
+      tl.set("#timecode", { textContent: "00:00:03" }, 2.4);
+      tl.set("#timecode", { textContent: "00:00:04" }, 3.2);
+
+      // Telemetry values fluctuation
+      tl.set("#posVal", { textContent: "1056.4" }, 1.2);
+      tl.set("#posVal", { textContent: "1082.1" }, 2.2);
+      tl.set("#posVal", { textContent: "1098.8" }, 3.0);
+
+      // Tracking bead pulse
+      tl.to("#trackingBead", { scale: 1.2, yoyo: true, repeat: 5, duration: 0.35, ease: "sine.inOut" }, 0.5);
 
       // Exit
-      tl.to(".scene-content", { y: -40, opacity: 0, duration: 0.28, ease: "power2.in" }, 3.9);
+      tl.to("#hudFrame", { y: -20, opacity: 0, duration: 0.3, ease: "power2.in" }, 3.9);
 
       tl.set({}, {}, 4.2);
       window.__timelines["scene1"] = tl;

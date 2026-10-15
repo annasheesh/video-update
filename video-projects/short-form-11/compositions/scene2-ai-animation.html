@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1080, height=1920">
-    <title>Scene 2 - Animation Up Here / Claude Builds The Edit</title>
+    <title>Scene 2 - Telemetry Stats & 3D AI Gallery</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <style>
       * {
@@ -27,413 +27,423 @@
         pointer-events: none;
       }
 
-      /* Headline (Direct Ref 1 detail_04.jpg: "Claude builds the edit") */
-      .headline-wrap {
+      /* Sci-Fi HUD Outer Frame (softgirlnocode signature) */
+      .hud-outer-frame {
         position: absolute;
         top: 36px;
-        left: 54px;
-        width: 972px;
+        left: 50px;
+        width: 980px;
+        height: 480px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 28px;
+        background: rgba(10, 10, 14, 0.94);
+        backdrop-filter: blur(24px);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 122, 0, 0.10);
+        padding: 24px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      /* HUD Corner Brackets */
+      .bracket {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border-color: rgba(255, 255, 255, 0.5);
+        border-style: solid;
+        pointer-events: none;
+      }
+      .bracket-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-top-left-radius: 28px; }
+      .bracket-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; border-top-right-radius: 28px; }
+      .bracket-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; border-bottom-left-radius: 28px; }
+      .bracket-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-bottom-right-radius: 28px; }
+
+      /* Top HUD Header Bar */
+      .hud-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        z-index: 10;
+        width: 100%;
       }
-      .headline-left {
+      .hud-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+      }
+      .hud-brand-bracket {
+        color: #FF7A00;
+        font-weight: 900;
+      }
+
+      /* Telemetry Tracker Badge */
+      .telemetry-wrap {
         display: flex;
         align-items: center;
         gap: 12px;
       }
-      .top-title {
-        font-size: 50px;
-        font-weight: 800;
-        color: #F5F0E8;
-        letter-spacing: -0.02em;
-        text-shadow: 0 4px 20px rgba(48, 40, 32, 1), 0 2px 8px rgba(0, 0, 0, 0.95);
-      }
-      .title-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #A68B65;
-        box-shadow: 0 0 16px #A68B65;
-      }
-      .top-badge {
-        background: #302820;
-        border: 2px solid #A68B65;
-        color: #F5F0E8;
-        font-size: 15px;
-        font-weight: 900;
+      .telemetry-text {
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
         letter-spacing: 0.08em;
-        padding: 6px 18px;
-        border-radius: 999px;
-        box-shadow: 0 4px 16px rgba(48, 40, 32, 0.8);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .telemetry-val {
+        color: #00D2FF;
+        font-weight: 700;
+      }
+      .telemetry-val-orange {
+        color: #FF7A00;
+        font-weight: 700;
+      }
+      .tracking-bead {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #FF7A00;
+        box-shadow: 0 0 16px #FF7A00, 0 0 30px rgba(255, 122, 0, 0.6);
+        position: relative;
+      }
+      .tracking-bead::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 122, 0, 0.5);
       }
 
-      /* STAGE 1: Big Clean Dashed Box (0.0s - 1.8s) */
-      .stage1-container {
-        position: absolute;
-        top: 100px;
-        left: 54px;
-        width: 972px;
-        height: 420px;
-        border: 3px dashed #F5F0E8;
-        border-radius: 32px;
-        padding: 24px 30px;
+      /* Main Stage: 2-Column Split (f012.jpg) */
+      .stage-body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 360px;
+        gap: 24px;
+        position: relative;
+      }
+
+      /* Left Column: Heading + Metric Stack */
+      .left-stack {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(48, 40, 32, 0.45);
-        box-shadow: 0 20px 50px rgba(48, 40, 32, 0.7);
-        backdrop-filter: blur(12px);
+        justify-content: center;
+        gap: 20px;
       }
 
-      /* Big Claude Prompt Card */
-      .claude-prompt-card {
-        width: 100%;
-        background: rgba(48, 40, 32, 0.95);
-        border: 2px solid rgba(200, 185, 166, 0.45);
-        border-radius: 24px;
-        padding: 24px 28px;
+      /* Heading: "Animations of editing with AI" */
+      .hud-title {
+        font-size: 34px;
+        font-weight: 800;
+        color: #FFFFFF;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+      .hud-title-orange {
+        color: #FF7A00;
+        font-weight: 900;
+      }
+      .hud-title-serif {
+        font-family: "Georgia", "Playfair Display", serif;
+        font-style: italic;
+        color: #E5A93C;
+        font-weight: 400;
+      }
+
+      /* Metric Rows */
+      .metrics-group {
         display: flex;
         flex-direction: column;
         gap: 16px;
-        box-shadow: 0 20px 48px rgba(48, 40, 32, 0.85);
       }
 
-      .prompt-text-line {
-        font-size: 30px;
-        font-weight: 600;
-        color: #F5F0E8;
-        line-height: 1.35;
-      }
-      .typing-cursor {
-        display: inline-block;
-        width: 3px;
-        height: 30px;
-        background: #A68B65;
-        margin-left: 6px;
-        vertical-align: middle;
+      .metric-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
       }
 
-      .prompt-footer {
+      .metric-bar-orange {
+        width: 5px;
+        height: 52px;
+        background: #FF7A00;
+        border-radius: 3px;
+        box-shadow: 0 0 14px rgba(255, 122, 0, 0.8);
+      }
+      .metric-bar-cyan {
+        width: 5px;
+        height: 52px;
+        background: #00D2FF;
+        border-radius: 3px;
+        box-shadow: 0 0 14px rgba(0, 210, 255, 0.8);
+      }
+      .metric-bar-gold {
+        width: 5px;
+        height: 48px;
+        background: #E5A93C;
+        border-radius: 3px;
+        box-shadow: 0 0 14px rgba(229, 169, 60, 0.8);
+      }
+
+      .metric-content {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
       }
-      .claude-badge {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: rgba(245, 240, 232, 0.12);
-        padding: 6px 16px;
-        border-radius: 999px;
-        border: 1px solid rgba(200, 185, 166, 0.35);
+      .metric-number {
+        font-size: 46px;
+        font-weight: 900;
+        color: #FFFFFF;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
       }
-      .claude-star-mini {
-        width: 22px;
-        height: 22px;
-      }
-      .claude-name {
-        font-size: 18px;
+      .metric-label {
+        font-size: 15px;
         font-weight: 700;
-        color: #F5F0E8;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.02em;
+        margin-top: 4px;
+        text-transform: uppercase;
       }
 
-      .send-btn {
-        width: 40px;
-        height: 40px;
-        background: #A68B65;
-        color: #F5F0E8;
-        border-radius: 50%;
+      /* Right Column: 3D Angled Perspective Gallery (f012.jpg) */
+      .gallery-viewport {
+        width: 480px;
+        height: 350px;
+        perspective: 1000px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
-        font-weight: 800;
-        box-shadow: 0 4px 14px rgba(166, 139, 101, 0.5);
+        position: relative;
       }
 
-      /* Target Indicator */
-      .target-indicator {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-      }
-      .target-label {
-        font-size: 26px;
-        font-weight: 900;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: #F5F0E8;
-        text-shadow: 0 3px 12px rgba(48, 40, 32, 0.95);
-      }
-      .target-chevron {
-        font-size: 40px;
-        color: #A68B65;
-        font-weight: 900;
-        line-height: 1;
-        text-shadow: 0 3px 12px rgba(48, 40, 32, 0.95);
+      .gallery-cards-wrap {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transform: rotateY(-22deg) rotateX(6deg);
       }
 
-      /* STAGE 2: 3-Picture AI Art Showcase (1.8s - 4.4s) */
-      .stage2-showcase {
+      /* 3 Floating 3D Cards */
+      .gallery-card {
         position: absolute;
-        top: 96px;
-        left: 54px;
-        width: 972px;
-        height: 428px;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 2px solid rgba(255, 255, 255, 0.25);
+        background: #14141A;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 210, 255, 0.15);
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        opacity: 0;
-        pointer-events: none;
       }
 
-      /* 3 Pictures Row */
-      .cards-row {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-      }
-
-      /* AI Picture Card Base */
-      .ai-pic-card {
-        border-radius: 24px;
-        overflow: hidden;
-        background: #302820;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 20px 48px rgba(48, 40, 32, 0.85);
-      }
-
-      /* Card 1: Left (Aperture Lens) */
-      .ai-card-1 {
-        width: 304px;
-        height: 360px;
-        border: 2px solid rgba(200, 185, 166, 0.45);
-        transform-origin: center bottom;
-      }
-
-      /* Card 2: Center Hero (Parametric Sculpture) */
-      .ai-card-2 {
-        width: 328px;
-        height: 376px;
-        border: 3px solid #A68B65;
-        box-shadow: 0 24px 60px rgba(48, 40, 32, 0.95), 0 0 30px rgba(166, 139, 101, 0.45);
-        z-index: 3;
-        transform: translateY(-8px);
-      }
-
-      /* Card 3: Right (Travertine Arches) */
-      .ai-card-3 {
-        width: 304px;
-        height: 360px;
-        border: 2px solid rgba(200, 185, 166, 0.45);
-        transform-origin: center bottom;
-      }
-
-      .card-img-wrap {
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-      }
-      .ai-card-1 .card-img-wrap, .ai-card-3 .card-img-wrap {
+      /* Card 1: Left Background */
+      .card-layer-1 {
+        width: 170px;
         height: 270px;
+        top: 40px;
+        left: 20px;
+        transform: translateZ(-40px);
+        opacity: 0.85;
       }
-      .ai-card-2 .card-img-wrap {
-        height: 282px;
+
+      /* Card 2: Center Hero */
+      .card-layer-2 {
+        width: 200px;
+        height: 310px;
+        top: 20px;
+        left: 140px;
+        transform: translateZ(50px);
+        border: 2.5px solid #FF7A00;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 122, 0, 0.35);
+        z-index: 3;
       }
-      .card-img-wrap img {
+
+      /* Card 3: Right Foreground */
+      .card-layer-3 {
+        width: 175px;
+        height: 280px;
+        top: 50px;
+        left: 290px;
+        transform: translateZ(10px);
+        border: 2px solid #00D2FF;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 210, 255, 0.25);
+        z-index: 2;
+      }
+
+      .card-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
       }
 
-      /* Top Pill Badges */
-      .pic-badge {
+      /* View Count Badges */
+      .card-views-badge {
         position: absolute;
-        top: 12px;
-        left: 12px;
-        background: rgba(48, 40, 32, 0.88);
-        backdrop-filter: blur(10px);
-        color: #F5F0E8;
-        font-size: 13px;
-        font-weight: 800;
-        letter-spacing: 0.06em;
-        padding: 5px 12px;
+        top: 10px;
+        left: 10px;
+        background: rgba(10, 10, 14, 0.85);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 999px;
-        border: 1px solid rgba(166, 139, 101, 0.45);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      }
-      .pic-badge-hero {
-        background: #A68B65;
-        color: #F5F0E8;
-        border-color: #F5F0E8;
-        box-shadow: 0 0 14px rgba(166, 139, 101, 0.8);
-      }
-
-      /* Bottom Info Bar */
-      .card-info-bar {
-        background: rgba(48, 40, 32, 0.96);
-        padding: 12px 16px;
+        padding: 4px 10px;
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 11px;
+        font-weight: 800;
+        color: #FFFFFF;
         display: flex;
-        flex-direction: column;
-        gap: 3px;
+        align-items: center;
+        gap: 5px;
       }
-      .info-title {
-        font-size: 18px;
-        font-weight: 800;
-        color: #F5F0E8;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      .badge-dot-orange {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #FF7A00;
+        box-shadow: 0 0 6px #FF7A00;
       }
-      .info-sub {
-        font-size: 13px;
-        font-weight: 700;
-        color: #C8B9A6;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-      .ai-card-2 .info-sub {
-        color: #A68B65;
-        font-weight: 800;
+      .badge-dot-cyan {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #00D2FF;
+        box-shadow: 0 0 6px #00D2FF;
       }
 
-      /* Bottom Ref 1 Diamond Keyframe Track HUD */
-      .timeline-hud {
+      /* Bottom Ruler Ticks & Play Indicator */
+      .hud-bottom-ruler {
         width: 100%;
-        height: 40px;
-        background: rgba(48, 40, 32, 0.94);
-        border: 1px solid rgba(166, 139, 101, 0.4);
-        border-radius: 12px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 0 18px;
-        backdrop-filter: blur(16px);
-        box-shadow: 0 8px 24px rgba(48, 40, 32, 0.6);
+        justify-content: center;
+        font-family: "SF Mono", "Consolas", monospace;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.35);
+        letter-spacing: 0.16em;
+        position: relative;
       }
-      .hud-label {
-        font-size: 13px;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        color: #C8B9A6;
-        text-transform: uppercase;
-      }
-      .hud-diamonds {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      .hud-diamond {
-        width: 10px;
-        height: 10px;
-        background: #A68B65;
-        transform: rotate(45deg);
-        box-shadow: 0 0 8px #A68B65;
-      }
-      .hud-tag {
-        font-size: 13px;
-        font-weight: 800;
-        color: #F5F0E8;
-        letter-spacing: 0.06em;
+      .ruler-marker {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #FF7A00;
+        box-shadow: 0 0 10px #FF7A00;
+        top: 4px;
+        left: 45%;
       }
     </style>
   </head>
   <body>
     <div data-hf-id="hf-s2-root" id="scene2-root" data-composition-id="scene2" data-duration="4.4" data-width="1080" data-height="1920">
-      <!-- Top Title -->
-      <div id="headlineWrap" class="headline-wrap">
-        <div class="headline-left">
-          <div class="top-title">Claude builds the edit</div>
-          <div class="title-dot"></div>
-        </div>
-        <div class="top-badge">3 AI PICTURES</div>
-      </div>
+      <!-- Sci-Fi HUD Outer Frame -->
+      <div id="hudFrame" class="hud-outer-frame">
+        <!-- Corner Brackets -->
+        <div class="bracket bracket-tl"></div>
+        <div class="bracket bracket-tr"></div>
+        <div class="bracket bracket-bl"></div>
+        <div class="bracket bracket-br"></div>
 
-      <!-- STAGE 1: Big Clean Dashed Box (0.0s - 1.8s) -->
-      <div id="stage1Box" class="stage1-container">
-        <!-- Big Prompt Card -->
-        <div id="promptCard" class="claude-prompt-card">
-          <div class="prompt-text-line">
-            "Generate 3 aesthetic visuals showing what I'm talking about."<span class="typing-cursor"></span>
+        <!-- Top Header: Brand + Telemetry -->
+        <div class="hud-header">
+          <div class="hud-brand">
+            <span class="hud-brand-bracket">┌</span> SOFTGIRLNOCODE / AI EDIT SUITE
           </div>
-          <div class="prompt-footer">
-            <div class="claude-badge">
-              <svg class="claude-star-mini" viewBox="0 0 100 100" fill="none">
-                <path d="M50 10 L50 90 M10 50 L90 50 M22 22 L78 78 M22 78 L78 22" stroke="#A68B65" stroke-width="14" stroke-linecap="round"/>
-              </svg>
-              <span class="claude-name">Claude</span>
+          <div class="telemetry-wrap">
+            <div class="telemetry-text">
+              POS <span id="posVal" class="telemetry-val">1058.4</span> SCL <span class="telemetry-val-orange">142%</span> VEL <span class="telemetry-val">2140 px/s</span>
             </div>
-            <div class="send-btn">↑</div>
+            <div id="trackingBead" class="tracking-bead"></div>
           </div>
         </div>
 
-        <!-- Target Label & Chevron -->
-        <div id="targetIndicator" class="target-indicator">
-          <div class="target-label">ANIMATIONS GO HERE</div>
-          <div id="chevron" class="target-chevron">∨</div>
+        <!-- Stage Body: Split Left Stack & Right 3D Perspective Gallery -->
+        <div class="stage-body">
+          <!-- Left: Headline + Metric Stat Stack -->
+          <div class="left-stack">
+            <div id="titleWrap" class="hud-title">
+              <span class="hud-title-orange">Animations</span> generated with <span class="hud-title-serif">AI</span>
+            </div>
+
+            <div class="metrics-group">
+              <!-- Metric 1: 50+ short-form videos -->
+              <div id="metric1" class="metric-item">
+                <div class="metric-bar-orange"></div>
+                <div class="metric-content">
+                  <div class="metric-number">50+</div>
+                  <div class="metric-label">short-form videos</div>
+                </div>
+              </div>
+
+              <!-- Metric 2: 5M+ short-form views -->
+              <div id="metric2" class="metric-item">
+                <div class="metric-bar-cyan"></div>
+                <div class="metric-content">
+                  <div class="metric-number">5M+</div>
+                  <div class="metric-label">short-form views</div>
+                </div>
+              </div>
+
+              <!-- Metric 3: 100% automated with code -->
+              <div id="metric3" class="metric-item">
+                <div class="metric-bar-gold"></div>
+                <div class="metric-content">
+                  <div class="metric-number" style="font-size: 38px;">100%</div>
+                  <div class="metric-label">automated with code</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: 3D Angled Perspective Gallery -->
+          <div class="gallery-viewport">
+            <div id="galleryCards" class="gallery-cards-wrap">
+              <!-- Card 1: Aperture Lens -->
+              <div id="gCard1" class="gallery-card card-layer-1">
+                <img class="card-img" src="../assets/images/ai_gen_lens.jpg" alt="AI Gen Lens">
+                <div class="card-views-badge">
+                  <div class="badge-dot-cyan"></div>
+                  <span>890K</span>
+                </div>
+              </div>
+
+              <!-- Card 2: Parametric Sculpture (Center Hero) -->
+              <div id="gCard2" class="gallery-card card-layer-2">
+                <img class="card-img" src="../assets/images/ai_gen_sculpture.jpg" alt="AI Gen Sculpture">
+                <div class="card-views-badge">
+                  <div class="badge-dot-orange"></div>
+                  <span>2.5M</span>
+                </div>
+              </div>
+
+              <!-- Card 3: Travertine Arches -->
+              <div id="gCard3" class="gallery-card card-layer-3">
+                <img class="card-img" src="../assets/images/aesthetic_arch.jpg" alt="AI Gen Arch">
+                <div class="card-views-badge">
+                  <div class="badge-dot-cyan"></div>
+                  <span>420K</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- STAGE 2: 3-Picture AI Art Showcase (1.8s - 4.4s) -->
-      <div id="stage2Showcase" class="stage2-showcase">
-        <div class="cards-row">
-          <!-- Card 1: Aperture Lens -->
-          <div id="card1" class="ai-pic-card ai-card-1">
-            <div class="card-img-wrap">
-              <img src="../assets/images/ai_gen_lens.jpg" alt="Aperture Lens AI Gen">
-              <div class="pic-badge">✦ AI GEN 01</div>
-            </div>
-            <div class="card-info-bar">
-              <div class="info-title">Aperture Lens</div>
-              <div class="info-sub">Octane 3D • 8K Render</div>
-            </div>
-          </div>
-
-          <!-- Card 2: Parametric Sculpture (Featured Hero) -->
-          <div id="card2" class="ai-pic-card ai-card-2">
-            <div class="card-img-wrap">
-              <img src="../assets/images/ai_gen_sculpture.jpg" alt="Parametric Sculpture AI Gen">
-              <div class="pic-badge pic-badge-hero">★ AI GEN 02 • HERO</div>
-            </div>
-            <div class="card-info-bar">
-              <div class="info-title">Organic Sculpture</div>
-              <div class="info-sub">Parametric Bronze Form</div>
-            </div>
-          </div>
-
-          <!-- Card 3: Travertine Arches -->
-          <div id="card3" class="ai-pic-card ai-card-3">
-            <div class="card-img-wrap">
-              <img src="../assets/images/aesthetic_arch.jpg" alt="Travertine Arches AI Gen">
-              <div class="pic-badge">✦ AI GEN 03</div>
-            </div>
-            <div class="card-info-bar">
-              <div class="info-title">Travertine Arches</div>
-              <div class="info-sub">Minimalist Architecture</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ref 1 Diamond Keyframe HUD -->
-        <div id="timelineHud" class="timeline-hud">
-          <span class="hud-label">KEYFRAMES</span>
-          <div class="hud-diamonds">
-            <div class="hud-diamond"></div>
-            <div class="hud-diamond"></div>
-            <div class="hud-diamond"></div>
-            <div class="hud-diamond"></div>
-            <div class="hud-diamond"></div>
-          </div>
-          <span class="hud-tag">✓ 60 FPS AUDIO-SYNCED</span>
+        <!-- Bottom Ruler Ticks -->
+        <div class="hud-bottom-ruler">
+          <div id="rulerMarker" class="ruler-marker"></div>
+          ┴╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵┴
         </div>
       </div>
     </div>
@@ -442,34 +452,44 @@
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
 
-      // Entrances for Stage 1
-      tl.from("#headlineWrap", { y: -30, opacity: 0, duration: 0.35, ease: "power2.out" }, 0.1);
-      tl.from("#stage1Box", { scale: 0.92, opacity: 0, duration: 0.45, ease: "power3.out" }, 0.2);
-      tl.from("#promptCard", { y: -30, opacity: 0, duration: 0.4, ease: "back.out(1.5)" }, 0.35);
+      // Frame entrance
+      tl.from("#hudFrame", { y: -25, opacity: 0, scale: 0.96, duration: 0.38, ease: "power3.out" }, 0.08);
 
-      // Typing cursor
-      tl.to(".typing-cursor", { opacity: 0, repeat: 4, yoyo: true, duration: 0.22 }, 0.4);
+      // Title & Metrics stagger
+      tl.from("#titleWrap", { x: -30, opacity: 0, duration: 0.35, ease: "power2.out" }, 0.18);
+      tl.from("#metric1", { x: -25, opacity: 0, duration: 0.3, ease: "back.out(1.6)" }, 0.28);
+      tl.from("#metric2", { x: -25, opacity: 0, duration: 0.3, ease: "back.out(1.6)" }, 0.45);
+      tl.from("#metric3", { x: -25, opacity: 0, duration: 0.3, ease: "back.out(1.6)" }, 0.62);
 
-      // Chevron bobbing
-      tl.to("#chevron", { y: 10, yoyo: true, repeat: 3, duration: 0.28, ease: "sine.inOut" }, 0.5);
+      // 3D Angled Gallery entrance
+      tl.from("#galleryCards", { 
+        rotationY: -45, 
+        scale: 0.82, 
+        opacity: 0, 
+        x: 60, 
+        duration: 0.55, 
+        ease: "power3.out" 
+      }, 0.25);
 
-      // Transition from Stage 1 to Stage 2 at 1.8s
-      tl.to("#stage1Box", { scale: 0.94, opacity: 0, y: -20, duration: 0.26, ease: "power2.in" }, 1.75);
+      tl.from("#gCard1", { y: 30, opacity: 0, duration: 0.35, ease: "power2.out" }, 0.35);
+      tl.from("#gCard2", { y: 40, opacity: 0, duration: 0.4, ease: "back.out(1.8)" }, 0.42);
+      tl.from("#gCard3", { y: 30, opacity: 0, duration: 0.35, ease: "power2.out" }, 0.50);
 
-      // Stage 2: 3-Picture AI Showcase fans in at 1.95s
-      tl.set("#stage2Showcase", { opacity: 1, pointerEvents: "auto" }, 1.9);
-      tl.from("#card1", { x: -80, rotation: -8, opacity: 0, duration: 0.45, ease: "back.out(1.8)" }, 1.95);
-      tl.from("#card2", { y: 60, scale: 0.8, opacity: 0, duration: 0.42, ease: "back.out(2.0)" }, 2.00);
-      tl.from("#card3", { x: 80, rotation: 8, opacity: 0, duration: 0.45, ease: "back.out(1.8)" }, 2.05);
-      tl.from("#timelineHud", { y: 25, opacity: 0, duration: 0.35, ease: "power2.out" }, 2.2);
+      // Subtle 3D floating hover (sinusoidal breathing)
+      tl.to("#gCard2", { y: -10, yoyo: true, repeat: 3, duration: 0.6, ease: "sine.inOut" }, 0.85);
+      tl.to("#gCard1", { y: 6, yoyo: true, repeat: 3, duration: 0.55, ease: "sine.inOut" }, 0.90);
+      tl.to("#gCard3", { y: -6, yoyo: true, repeat: 3, duration: 0.65, ease: "sine.inOut" }, 0.95);
 
-      // Subtle float breathing animation on inner image wrap (no property conflict)
-      tl.to("#card2 .card-img-wrap", { y: -8, yoyo: true, repeat: 3, duration: 0.48, ease: "sine.inOut" }, 2.45);
-      tl.to("#card1 .card-img-wrap", { y: -6, yoyo: true, repeat: 3, duration: 0.48, ease: "sine.inOut" }, 2.5);
-      tl.to("#card3 .card-img-wrap", { y: -6, yoyo: true, repeat: 3, duration: 0.48, ease: "sine.inOut" }, 2.55);
+      // Telemetry fluctuation & bead pulse
+      tl.to("#trackingBead", { scale: 1.25, yoyo: true, repeat: 6, duration: 0.32, ease: "sine.inOut" }, 0.4);
+      tl.set("#posVal", { textContent: "1072.0" }, 1.3);
+      tl.set("#posVal", { textContent: "1094.6" }, 2.5);
+
+      // Bottom ruler marker slide
+      tl.fromTo("#rulerMarker", { x: -120 }, { x: 120, duration: 3.5, ease: "none" }, 0.4);
 
       // Exit
-      tl.to(["#stage2Showcase", "#headlineWrap"], { y: -40, opacity: 0, duration: 0.28, ease: "power2.in" }, 4.05);
+      tl.to("#hudFrame", { y: -20, opacity: 0, duration: 0.28, ease: "power2.in" }, 4.12);
 
       tl.set({}, {}, 4.4);
       window.__timelines["scene2"] = tl;
